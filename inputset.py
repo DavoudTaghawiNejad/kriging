@@ -1,6 +1,8 @@
 __author__ = 'taghawi'
 import numpy as np
 from collections import defaultdict
+from commonset import get_two_hierarchies_of_keys
+
 
 class InputSet:
     """ stores inputs, avoids duplicates, returns them as dictionaries.
@@ -53,8 +55,7 @@ class InputSet:
         return False
 
 
-def get_two_hierarchies_of_keys(hirarchical_dictionary):
-    return tuple([(top, down) for top in hirarchical_dictionary.keys() for down in hirarchical_dictionary[top]])
+
 
 
 
