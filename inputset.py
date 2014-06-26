@@ -42,13 +42,13 @@ class InputSet:
         d = defaultdict(dict)
         i = 0
         for category, key in self.keys:
-            d[category][key] = self.dtypes[category,key](self.data[item][i])
+            d[category][key] = self.dtypes[i](self.data[item][i])
             i += 1
-        d.update(InputSet.fixed_input)
-        return d
+        return combine(InputSet.fixed_input, d, self.keys)
+
 
     def is_in_data(self, what):
-        assert isinstance(input, np.ndarray)
+        assert isinstance(what, np.ndarray), type(what)
         for d in self.data:
             if np.array_equal(d, what):
                 return True
@@ -79,8 +79,12 @@ class InputSet:
 def encode(what):
     return np.array([what[category][key] for category, key in InputSet.keys])
 
-
-
+def combine(A, B, Bkeys):
+    combined = defaultdict(dict)
+    combined.update(A)
+    for category, key in Bkeys:
+        combined[category][key] = B[category][key]
+    return combined
 
 
 
