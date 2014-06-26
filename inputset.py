@@ -9,16 +9,18 @@ class InputSet:
     Also provides lb, ub and dtype
 
     """
-    def __init__(self, lower_bound, upper_bound, dtypes, fixed_input):
+    @staticmethod
+    def setup(lower_bound, upper_bound, dtypes, fixed_input):
         lb_keys = get_two_hierarchies_of_keys(lower_bound)
         ub_keys = get_two_hierarchies_of_keys(upper_bound)
         dt_keys = get_two_hierarchies_of_keys(dtypes)
         assert lb_keys == ub_keys == dt_keys
-        self.keys = lb_keys
-        sulf.lb = self.encode(lower_bound)
-        self.ub = self.encode(upper_bound)
-        self.dtypes = self.encode(dtypes)
-        self.data = []
+        InputSet.keys = lb_keys
+        InputSet.lb = encode(lower_bound)
+        InputSet.ub = encode(upper_bound)
+        InputSet.dtypes = encode(dtypes)
+        InputSet.fixed_input = fixed_input
+        InputSet.data = []
 
 
     def insert(self, input):
@@ -42,10 +44,8 @@ class InputSet:
         for category, key in self.keys:
             d[category][key] = self.dtypes[category,key](self.data[item][i])
             i += 1
+        d.update(InputSet.fixed_input)
         return d
-
-    def encode(self, what):
-        return [what[category][key] for category, key in self.keys]
 
     def is_in_data(self, what):
         assert isinstance(input, np.ndarray)
@@ -54,6 +54,30 @@ class InputSet:
                 return True
         return False
 
+    def respect_lb(self, x):
+        """ sets every parameter to at least the lower bound"""
+        assert isinstance(x, np.ndarray)
+        return np.maximum(self.lb, x)
+
+    def respect_ub(self, x):
+        """ sets every parameter to at most the upper bound"""
+        assert isinstance(x, np.ndarray)
+        return np.minimum(self.ub, x)
+
+    def respect_bounds(self, x):
+        """ sets every parameter to at least the lower and at most the upper bound"""
+        assert (self.lb <= self.ub).all()
+        x = self.respect_lb(x)
+        x = self.respect_ub(x)
+        return x
+
+    def insert_middle_point(self):
+        """ inserts the middle point of the hyperplain as an entry """
+        self.insert(InputSet.ub - InputSet.lb)
+
+
+def encode(what):
+    return np.array([what[category][key] for category, key in InputSet.keys])
 
 
 
