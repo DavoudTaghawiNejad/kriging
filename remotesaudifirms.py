@@ -37,7 +37,6 @@ class RemoteSaudiFirms:
         return results
 
     def run_D2D(self, jobs, repetitions):
-        print jobs[0]
         print("going to vent"),
         flush()
         t = time()
@@ -50,8 +49,9 @@ class RemoteSaudiFirms:
             try:
                 work_done.append(json.loads(element))
             except ValueError:
+                print("**********")
                 print(element)
-                flush()
+                print("**********")
                 raise
         print("\t\t\tfinished in: %f" % (time() - t))
         flush()
