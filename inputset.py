@@ -4,7 +4,7 @@ from collections import defaultdict
 from commonset import get_two_hierarchies_of_keys
 
 
-class InputSet:
+class InputSet(object):
     """ stores inputs, avoids duplicates, returns them as dictionaries.
     Also provides lb, ub and dtype
 
@@ -20,8 +20,12 @@ class InputSet:
         InputSet.ub = encode(upper_bound)
         InputSet.dtypes = encode(dtypes)
         InputSet.fixed_input = fixed_input
-        InputSet.data = []
+        distance = InputSet.ub - InputSet.lb
+        assert (distance > 0).all(), "lower- and upper-bound overlap"
+        assert (distance < float("Inf")).all()
 
+    def __init__(self):
+        self.inputs = []
 
     def insert(self, input):
         """
@@ -30,8 +34,9 @@ class InputSet:
         :
         """
         assert isinstance(input, np.ndarray)
+        input = InputSet.respect_bounds(input)
         if not self.is_in_data(input):
-            self.data.append(input)
+            self.inputs.append(input)
 
     def __getitem__(self, item):
         """
@@ -42,38 +47,37 @@ class InputSet:
         d = defaultdict(dict)
         i = 0
         for category, key in self.keys:
-            d[category][key] = self.dtypes[i](self.data[item][i])
+            d[category][key] = self.dtypes[i](self.inputs[item][i])
             i += 1
         return combine(InputSet.fixed_input, d, self.keys)
 
 
     def is_in_data(self, what):
         assert isinstance(what, np.ndarray), type(what)
-        for d in self.data:
+        for d in self.inputs:
             if np.array_equal(d, what):
                 return True
         return False
 
-    def respect_lb(self, x):
-        """ sets every parameter to at least the lower bound"""
-        assert isinstance(x, np.ndarray)
-        return np.maximum(self.lb, x)
-
-    def respect_ub(self, x):
-        """ sets every parameter to at most the upper bound"""
-        assert isinstance(x, np.ndarray)
-        return np.minimum(self.ub, x)
-
-    def respect_bounds(self, x):
-        """ sets every parameter to at least the lower and at most the upper bound"""
-        assert (self.lb <= self.ub).all()
-        x = self.respect_lb(x)
-        x = self.respect_ub(x)
+    @staticmethod
+    def respect_bounds(x):
+        for i in range(len(x)):
+            l = InputSet.lb[i]
+            u = InputSet.ub[i]
+            assert l < u, l - u
+            if x[i] < l:
+                x[i] = l
+            if x[i] > u:
+                x[i] = u
         return x
 
-    def insert_middle_point(self):
+    @staticmethod
+    def middle_point():
         """ inserts the middle point of the hyperplain as an entry """
-        self.insert(InputSet.ub - InputSet.lb)
+        return InputSet.ub - InputSet.lb
+
+    def __len__(self):
+        return len(self.inputs)
 
 
 def encode(what):
@@ -85,9 +89,3 @@ def combine(A, B, Bkeys):
     for category, key in Bkeys:
         combined[category][key] = B[category][key]
     return combined
-
-
-
-
-
-
