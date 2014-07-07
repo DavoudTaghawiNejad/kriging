@@ -45,17 +45,26 @@ class RemoteSaudiFirms:
         print("\r%i tasks given 0 done" % self.total_tasks),
         flush()
         work_done = []
+        timeout = 0
         for element in self.sink():
+            return_json = json.loads(element)
+            if return_json['result'] == "timeout":
+                timeout += 1
+                continue
             try:
-                work_done.append(json.loads(element))
+                work_done.append(return_json)
             except ValueError:
                 print("**********")
                 print(element)
                 print("**********")
                 raise
-        print("\t\t\tfinished in: %f" % (time() - t))
+        print("(%i timeouts)\tfinished in: %f" % (timeout, time() - t))
         flush()
         return work_done
 
     def kill(self, force=False):
         self.controller.send(b'kill')
+
+if __name__ == "__main__":
+    rsf = RemoteSaudiFirms()
+    rsf.kill()

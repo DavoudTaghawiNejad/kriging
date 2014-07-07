@@ -25,7 +25,7 @@ class PredictedSet(InputSet):
             self.inputs.append(input)
             self.metrics.append(metric)
 
-    def __getitem__(self, item):
+    def get_input_metric(self, item):
         """
         returns a json-dictionary with simulation parameters
         :param item: number
@@ -37,3 +37,17 @@ class PredictedSet(InputSet):
             d[category][key] = self.dtypes[i](self.inputs[item][i])
             i += 1
         return combine(PredictedSet.fixed_input, d, self.keys), self.metrics[item]
+
+
+    def __getitem__(self, item):
+        """
+        returns a json-dictionary with simulation parameters
+        :param item: number
+        :return: json with simulation input
+        """
+        d = defaultdict(dict)
+        i = 0
+        for category, key in self.keys:
+            d[category][key] = self.dtypes[i](self.inputs[item][i])
+            i += 1
+        return combine(PredictedSet.fixed_input, d, self.keys)
