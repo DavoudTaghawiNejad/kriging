@@ -50,14 +50,16 @@ class Kriging:
         inputset.insert(InputSet.middle_point())
         print(dict(inputset[0]))
 
-    def kriging(self, sweep_intervals='', batch_size=28, success=0.01):
-        gp = gaussian_process.GaussianProcess()
+    def kriging(self, sweep_intervals='', batch_size=28, success=0.01, schlinge_start=2.0, schlinge_change=0.05):
+        gp = gaussian_process.GaussianProcess(
+            nugget=2.2204460492503131e-13, storage_mode='light'
+        )
         get_key = Keypress()
         sweep_intervals = inputset.encode(sweep_intervals)
         diameter = (InputSet.ub - InputSet.lb) / 2
         initial_distance = InputSet.ub - InputSet.lb
         schlinge = np.empty_like(InputSet.ub)
-        schlinge.fill(2.0)
+        schlinge.fill(schlinge_start)
         stats_innovation_kriging = 0
         stats_innovation_simulation = 0
         stats_iterations = 0
@@ -88,7 +90,7 @@ class Kriging:
                 print("-s- %s" % simulation_candidate[1])
 
             if not kriging_candidate_is_better and not simulation_candidate_is_better:
-                schlinge -= 0.05
+                schlinge -= schlinge_change
                 schlinge = np.maximum(schlinge, np.absolute(candidate[0] - old_best[0]) / diameter)
                 #schlinge = np.minimum(schlinge, [2] * len(schlinge))
                 schlinge[schlinge < 0] = 0
