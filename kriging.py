@@ -6,7 +6,7 @@ from keypress import Keypress
 from remotesaudifirms import RemoteSaudiFirms
 from kriging_model import kriger
 import numpy as np
-from copy import copy
+from copy import deepcopy
 from hypercube import hypercube
 from sklearn import gaussian_process
 import json
@@ -119,12 +119,11 @@ class Kriging:
                 print("iterations             %i" % stats_iterations)
                 print("unique simulations     %i" % len(self.simulations))
                 print(self.simulations.best_dict())
-
-            if key_pressed == 'c':
-                return self.simulations.best()
+                if key_pressed == 'c':
+                    return self.simulations.best()
 
     def candidates_better(self, old_best, candidates):
-        best = copy(old_best)
+        best = deepcopy(old_best)
         num_better = 0
         for input, metric in candidates:
             if self.simulations.is_new(input):
@@ -132,10 +131,10 @@ class Kriging:
                     best = input
                 if metric < old_best[1]:
                     num_better += 1
-        if best[1] < old_best[1]:
-            return True, best, num_better
-        else:
+        if num_better == 0:
             return False, old_best, num_better
+        else:
+            return True, best, num_better
 
 
     def run_add(self, input):
