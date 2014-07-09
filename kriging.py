@@ -64,6 +64,8 @@ class Kriging:
         logger.info(dict(inputset[0]))
 
     def kriging(self, sweep_intervals='', batch_size=28, success=0.01, schlinge_start=2.0, schlinge_change=0.05):
+        INPUT, RESULT = 0, 1
+        log_values = self._db['log_values']
         gp = gaussian_process.GaussianProcess(
             nugget=2.2204460492503131e-13, storage_mode='light'
         )
@@ -119,7 +121,6 @@ class Kriging:
             logger.info("    schlinge average %f" % np.mean(schlinge))
 
             #TODO pred = np.array([gp.predict(candidate[0]) for candidate in simulation_candidates], dtype=np.float64)
-            stats_iterations += 1
             #TODO logger.info("    mean prediction accuracy %f" % np.mean(np.absolute((simulation_candidates[0] - pred) / simulation_candidates[1])))
             if self.simulations.best()[1] < success:
                 break
@@ -135,7 +136,23 @@ class Kriging:
                 logger.info("unique simulations     %i" % len(self.simulations))
                 logger.info(self.simulations.best_dict())
                 if key_pressed == 'c':
-                    return self.simulations.best()
+                    return self.simulations.best_dict()
+            if key_pressed == 't':
+                logger.info(json.dumps(self.test(self.simulations.best_dict(), 20), indent=20))
+            logger.debug(json.dumps(self.test(self.simulations.best_dict(), 20), indent=20))
+            log_data = {
+                'iteration': stats_iterations,
+                'average_kriging': kriging_candidates.average(),
+                'best_kriging':  kriging_candidates.best()[RESULT],
+                'average_current_simulation': simulation_candidates.average(),
+                'best_simulation_candidate': simulation_candidates.best()[RESULT],
+                'total_average': self.simulations.average(),
+                'best': self.simulations.best()[RESULT]
+            }
+            log_data.update(flatten(self.test(self.simulations.best_dict(), 20)))
+
+            log_values.upsert(log_data, ['iteration'])
+            stats_iterations += 1
 
     def candidates_better(self, old_best, candidates):
         best = deepcopy(old_best)
@@ -164,3 +181,22 @@ class Kriging:
             self.db.insert({'input': json.dumps(input), 'output': json.dumps(output)})
         return new_simulations
 
+    def test(self, input, repetitions):
+        """ runs one input; returns simulation """
+        raw_output = self.remote_saudifirms.run_D2D([input], repetitions)
+        output = defaultdict(lambda: defaultdict(int))
+        for row in raw_output:
+            for category, key in SimulationSet.output_keys:
+                output[category][key] += (1 / repetitions) * row['result'][category][key]
+        return output
+
+
+def flatten(d, parent_key=''):
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + '_' + k if parent_key else k
+        if isinstance(v, MutableMapping):
+            items.extend(flatten(v, new_key).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
