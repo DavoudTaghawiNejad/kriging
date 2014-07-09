@@ -33,7 +33,7 @@ def kriger(simulations, InputSet, sweep_intervals, schlinge, num_return_best, gp
         u += rnd
         chaines[i] = np.arange(l, u, (u - l) / sweep_intervals[i], dtype=d)
         if u > sub:
-            chaines[i] = chaines[i][:-2]
+            chaines[i] = chaines[i][:-1]
         if l < slb:
             chaines[i] = chaines[i][1:]
     logger.info("    brute_force iterations: chaines: %i" % (len(chaines)))

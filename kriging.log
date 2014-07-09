@@ -1,0 +1,923 @@
+07-09 17:19:55	tcp://*:5558
+07-09 17:19:55	loaded 0
+07-09 17:19:55	going to vent
+07-09 17:19:55	140 tasks given 0 done
+07-09 17:19:56	(0 timeouts)	finished in: 0.826481
+07-09 17:19:57	
+07-09 17:19:57	iteration: 0 total simulations: 20
+07-09 17:19:57	len chaines: 20
+07-09 17:19:57	(20, 0)
+07-09 17:19:57	    brute_force iterations: chaines: 20
+07-09 17:19:57	    candidates for predict: 0
+07-09 17:19:57	    time: -0.000070
+07-09 17:19:57	    candidates better: 0
+07-09 17:19:57	    candidates < 0: 0
+07-09 17:19:57	going to vent
+07-09 17:19:57	0 tasks given 0 done
+07-09 17:19:57	(0 timeouts)	finished in: 0.000139
+07-09 17:19:57	-k- 54032160.231
+07-09 17:19:57	***    hypercube:
+07-09 17:19:57	going to vent
+07-09 17:19:57	140 tasks given 0 done
+07-09 17:19:59	(0 timeouts)	finished in: 2.345495
+07-09 17:19:59	-s- 54032160.231
+07-09 17:19:59	    simul:    54032160.23104735 (0.00000000)
+07-09 17:19:59	    score: -0.24
+07-09 17:19:59	    schlinge average 1.950000
+07-09 17:19:59	going to vent
+07-09 17:19:59	20 tasks given 0 done
+07-09 17:20:01	(0 timeouts)	finished in: 1.329346
+07-09 17:24:39	tcp://*:5558
+07-09 17:24:39	loaded 40
+07-09 17:24:39	
+07-09 17:24:39	iteration: 0 total simulations: 40
+07-09 17:24:39	len chaines: 20
+07-09 17:24:39	(20, 0)
+07-09 17:24:39	    brute_force iterations: chaines: 20
+07-09 17:24:39	    candidates for predict: 0
+07-09 17:24:39	    time: -0.000069
+07-09 17:24:39	    candidates better: 0
+07-09 17:24:39	    candidates < 0: 0
+07-09 17:24:39	going to vent
+07-09 17:24:39	0 tasks given 0 done
+07-09 17:24:39	(0 timeouts)	finished in: 0.000146
+07-09 17:24:39	-k- 530.59561384
+07-09 17:24:39	***    hypercube:
+07-09 17:24:39	going to vent
+07-09 17:24:39	140 tasks given 0 done
+07-09 17:24:42	(0 timeouts)	finished in: 2.903421
+07-09 17:24:42	-s- 530.59561384
+07-09 17:24:42	    simul:    530.59561384 (0.00000000)
+07-09 17:24:42	    score:  0.1
+07-09 17:24:42	    schlinge average 1.950000
+07-09 17:24:42	going to vent
+07-09 17:24:42	20 tasks given 0 done
+07-09 17:24:42	(0 timeouts)	finished in: 0.230866
+07-09 17:25:06	tcp://*:5558
+07-09 17:25:06	loaded 60
+07-09 17:25:06	
+07-09 17:25:06	iteration: 0 total simulations: 60
+07-09 17:25:06	len chaines: 20
+07-09 17:25:06	(20, 0)
+07-09 17:25:06	    brute_force iterations: chaines: 20
+07-09 17:25:06	    candidates for predict: 0
+07-09 17:25:06	    time: -0.000069
+07-09 17:25:06	    candidates better: 0
+07-09 17:25:06	    candidates < 0: 0
+07-09 17:25:06	going to vent
+07-09 17:25:06	0 tasks given 0 done
+07-09 17:25:06	(0 timeouts)	finished in: 0.000145
+07-09 17:25:06	-k- 45.2432289736
+07-09 17:25:06	***    hypercube:
+07-09 17:25:06	going to vent
+07-09 17:25:06	140 tasks given 0 done
+07-09 17:25:08	(0 timeouts)	finished in: 2.251048
+07-09 17:25:09	-s- 45.2432289736
+07-09 17:25:09	    simul:    45.24322897 (0.00000000)
+07-09 17:25:09	    score: 0.24
+07-09 17:25:09	    schlinge average 1.950000
+07-09 17:25:09	going to vent
+07-09 17:25:09	20 tasks given 0 done
+07-09 17:25:09	(0 timeouts)	finished in: 0.137985
+07-09 17:25:10	tcp://*:5558
+07-09 17:25:10	loaded 80
+07-09 17:25:10	
+07-09 17:25:10	iteration: 0 total simulations: 80
+07-09 17:25:10	len chaines: 20
+07-09 17:25:10	(20, 0)
+07-09 17:25:10	    brute_force iterations: chaines: 20
+07-09 17:25:10	    candidates for predict: 0
+07-09 17:25:10	    time: -0.000069
+07-09 17:25:10	    candidates better: 0
+07-09 17:25:10	    candidates < 0: 0
+07-09 17:25:10	going to vent
+07-09 17:25:10	0 tasks given 0 done
+07-09 17:25:10	(0 timeouts)	finished in: 0.000147
+07-09 17:25:10	-k- 8.39204409885
+07-09 17:25:10	***    hypercube:
+07-09 17:25:10	going to vent
+07-09 17:25:10	140 tasks given 0 done
+07-09 17:25:13	(0 timeouts)	finished in: 2.321938
+07-09 17:25:13	-s- 8.39204409885
+07-09 17:25:13	    simul:    8.39204410 (0.00000000)
+07-09 17:25:13	    score: 0.17
+07-09 17:25:13	    schlinge average 1.950000
+07-09 17:25:13	going to vent
+07-09 17:25:13	20 tasks given 0 done
+07-09 17:25:13	(0 timeouts)	finished in: 0.108264
+07-09 17:25:15	
+07-09 17:25:15	iteration: 1 total simulations: 100
+07-09 17:25:15	len chaines: 20
+07-09 17:25:15	(20, 0)
+07-09 17:25:15	    brute_force iterations: chaines: 20
+07-09 17:25:15	    candidates for predict: 0
+07-09 17:25:15	    time: -0.000062
+07-09 17:25:15	    candidates better: 0
+07-09 17:25:15	    candidates < 0: 0
+07-09 17:25:15	going to vent
+07-09 17:25:15	0 tasks given 0 done
+07-09 17:25:15	(0 timeouts)	finished in: 0.000145
+07-09 17:25:15	-k- 8.39204409885
+07-09 17:25:15	***    hypercube:
+07-09 17:25:15	going to vent
+07-09 17:25:15	140 tasks given 0 done
+07-09 17:25:17	(0 timeouts)	finished in: 1.652566
+07-09 17:25:17	-s- 8.39204409885
+07-09 17:25:17	    simul:    8.39204410 (0.00000000)
+07-09 17:25:17	    score: 0.18
+07-09 17:25:17	    schlinge average 1.900000
+07-09 17:25:17	going to vent
+07-09 17:25:17	20 tasks given 0 done
+07-09 17:25:17	(0 timeouts)	finished in: 0.135016
+07-09 17:25:17	
+07-09 17:25:17	iteration: 2 total simulations: 120
+07-09 17:25:17	len chaines: 20
+07-09 17:25:17	(20, 0)
+07-09 17:25:17	    brute_force iterations: chaines: 20
+07-09 17:25:17	    candidates for predict: 0
+07-09 17:25:17	    time: -0.000060
+07-09 17:25:17	    candidates better: 0
+07-09 17:25:17	    candidates < 0: 0
+07-09 17:25:17	going to vent
+07-09 17:25:17	0 tasks given 0 done
+07-09 17:25:17	(0 timeouts)	finished in: 0.000139
+07-09 17:25:17	-k- 8.39204409885
+07-09 17:25:17	***    hypercube:
+07-09 17:25:17	going to vent
+07-09 17:25:17	140 tasks given 0 done
+07-09 17:25:20	(0 timeouts)	finished in: 2.692973
+07-09 17:25:21	-s- 8.39204409885
+07-09 17:25:21	    simul:    8.39204410 (0.00000000)
+07-09 17:25:21	    score: 0.29
+07-09 17:25:21	    schlinge average 1.850000
+07-09 17:25:21	going to vent
+07-09 17:25:21	20 tasks given 0 done
+07-09 17:25:21	(0 timeouts)	finished in: 0.103078
+07-09 17:25:21	
+07-09 17:25:21	iteration: 3 total simulations: 140
+07-09 17:25:21	len chaines: 20
+07-09 17:25:21	(20, 0)
+07-09 17:25:21	    brute_force iterations: chaines: 20
+07-09 17:25:21	    candidates for predict: 0
+07-09 17:25:21	    time: -0.000059
+07-09 17:25:21	    candidates better: 0
+07-09 17:25:21	    candidates < 0: 0
+07-09 17:25:21	going to vent
+07-09 17:25:21	0 tasks given 0 done
+07-09 17:25:21	(0 timeouts)	finished in: 0.000137
+07-09 17:25:21	-k- 8.39204409885
+07-09 17:25:21	***    hypercube:
+07-09 17:25:21	going to vent
+07-09 17:25:21	140 tasks given 0 done
+07-09 17:25:23	(0 timeouts)	finished in: 2.433786
+07-09 17:25:24	-s- 8.39204409885
+07-09 17:25:24	    simul:    8.39204410 (0.00000000)
+07-09 17:25:24	    score: 0.38
+07-09 17:25:24	    schlinge average 1.800000
+07-09 17:25:24	going to vent
+07-09 17:25:24	20 tasks given 0 done
+07-09 17:25:24	(0 timeouts)	finished in: 0.116051
+07-09 17:25:24	
+07-09 17:25:24	iteration: 4 total simulations: 160
+07-09 17:25:24	len chaines: 20
+07-09 17:25:24	(20, 0)
+07-09 17:25:24	    brute_force iterations: chaines: 20
+07-09 17:25:24	    candidates for predict: 0
+07-09 17:25:24	    time: -0.000060
+07-09 17:25:24	    candidates better: 0
+07-09 17:25:24	    candidates < 0: 0
+07-09 17:25:24	going to vent
+07-09 17:25:24	0 tasks given 0 done
+07-09 17:25:24	(0 timeouts)	finished in: 0.000135
+07-09 17:25:24	-k- 8.39204409885
+07-09 17:25:24	***    hypercube:
+07-09 17:25:24	going to vent
+07-09 17:25:24	140 tasks given 0 done
+07-09 17:25:27	(0 timeouts)	finished in: 2.457374
+07-09 17:25:27	-s- 8.39204409885
+07-09 17:25:27	    simul:    8.39204410 (0.00000000)
+07-09 17:25:27	    score: 0.28
+07-09 17:25:27	    schlinge average 1.750000
+07-09 17:25:27	going to vent
+07-09 17:25:27	20 tasks given 0 done
+07-09 17:25:27	(0 timeouts)	finished in: 0.244683
+07-09 17:25:28	
+07-09 17:25:28	iteration: 5 total simulations: 180
+07-09 17:25:28	len chaines: 20
+07-09 17:25:28	(20, 0)
+07-09 17:25:28	    brute_force iterations: chaines: 20
+07-09 17:25:28	    candidates for predict: 0
+07-09 17:25:28	    time: -0.000060
+07-09 17:25:28	    candidates better: 0
+07-09 17:25:28	    candidates < 0: 0
+07-09 17:25:28	going to vent
+07-09 17:25:28	0 tasks given 0 done
+07-09 17:25:28	(0 timeouts)	finished in: 0.000138
+07-09 17:25:28	-k- 8.39204409885
+07-09 17:25:28	***    hypercube:
+07-09 17:25:28	going to vent
+07-09 17:25:28	140 tasks given 0 done
+07-09 17:25:30	(0 timeouts)	finished in: 2.699238
+07-09 17:25:31	-s- 8.39204409885
+07-09 17:25:31	    simul:    8.39204410 (0.00000000)
+07-09 17:25:31	    score:  0.2
+07-09 17:25:31	    schlinge average 1.700000
+07-09 17:25:31	going to vent
+07-09 17:25:31	20 tasks given 0 done
+07-09 17:25:33	(0 timeouts)	finished in: 2.507680
+07-09 17:25:33	
+07-09 17:25:33	iteration: 6 total simulations: 200
+07-09 17:25:33	len chaines: 20
+07-09 17:25:33	(20, 0)
+07-09 17:25:33	    brute_force iterations: chaines: 20
+07-09 17:25:33	    candidates for predict: 0
+07-09 17:25:33	    time: -0.000061
+07-09 17:25:33	    candidates better: 0
+07-09 17:25:33	    candidates < 0: 0
+07-09 17:25:33	going to vent
+07-09 17:25:33	0 tasks given 0 done
+07-09 17:25:33	(0 timeouts)	finished in: 0.000138
+07-09 17:25:33	-k- 8.39204409885
+07-09 17:25:33	***    hypercube:
+07-09 17:25:33	going to vent
+07-09 17:25:34	140 tasks given 0 done
+07-09 17:25:35	(0 timeouts)	finished in: 1.779467
+07-09 17:25:36	-s- 8.39204409885
+07-09 17:25:36	    simul:    8.39204410 (0.00000000)
+07-09 17:25:36	    score: 0.51
+07-09 17:25:36	    schlinge average 1.650000
+07-09 17:25:36	going to vent
+07-09 17:25:36	20 tasks given 0 done
+07-09 17:25:37	(0 timeouts)	finished in: 0.711514
+07-09 17:25:37	
+07-09 17:25:37	iteration: 7 total simulations: 220
+07-09 17:25:37	len chaines: 20
+07-09 17:25:37	(20, 0)
+07-09 17:25:37	    brute_force iterations: chaines: 20
+07-09 17:25:37	    candidates for predict: 0
+07-09 17:25:37	    time: -0.000061
+07-09 17:25:37	    candidates better: 0
+07-09 17:25:37	    candidates < 0: 0
+07-09 17:25:37	going to vent
+07-09 17:25:37	0 tasks given 0 done
+07-09 17:25:37	(0 timeouts)	finished in: 0.000137
+07-09 17:25:37	-k- 8.39204409885
+07-09 17:25:37	***    hypercube:
+07-09 17:25:37	going to vent
+07-09 17:25:37	140 tasks given 0 done
+07-09 17:25:40	(0 timeouts)	finished in: 2.792973
+07-09 17:25:40	-s- 8.39204409885
+07-09 17:25:40	    simul:    8.39204410 (0.00000000)
+07-09 17:25:40	    score: 0.31
+07-09 17:25:40	    schlinge average 1.600000
+07-09 17:25:40	going to vent
+07-09 17:25:40	20 tasks given 0 done
+07-09 17:25:40	(0 timeouts)	finished in: 0.121224
+07-09 17:25:40	
+07-09 17:25:40	iteration: 8 total simulations: 240
+07-09 17:25:40	len chaines: 20
+07-09 17:25:40	(20, 0)
+07-09 17:25:40	    brute_force iterations: chaines: 20
+07-09 17:25:40	    candidates for predict: 0
+07-09 17:25:40	    time: -0.000061
+07-09 17:25:40	    candidates better: 0
+07-09 17:25:40	    candidates < 0: 0
+07-09 17:25:40	going to vent
+07-09 17:25:40	0 tasks given 0 done
+07-09 17:25:40	(0 timeouts)	finished in: 0.000141
+07-09 17:25:40	-k- 8.39204409885
+07-09 17:25:40	***    hypercube:
+07-09 17:25:40	going to vent
+07-09 17:25:40	140 tasks given 0 done
+07-09 17:25:43	(0 timeouts)	finished in: 2.637904
+07-09 17:25:44	-s- 8.39204409885
+07-09 17:25:44	    simul:    8.39204410 (0.00000000)
+07-09 17:25:44	    score: 0.35
+07-09 17:25:44	    schlinge average 1.550000
+07-09 17:25:44	going to vent
+07-09 17:25:44	20 tasks given 0 done
+07-09 17:25:46	(0 timeouts)	finished in: 1.959751
+07-09 17:25:46	
+07-09 17:25:46	iteration: 9 total simulations: 260
+07-09 17:25:46	len chaines: 20
+07-09 17:25:46	(20, 0)
+07-09 17:25:46	    brute_force iterations: chaines: 20
+07-09 17:25:46	    candidates for predict: 0
+07-09 17:25:46	    time: -0.000074
+07-09 17:25:46	    candidates better: 0
+07-09 17:25:46	    candidates < 0: 0
+07-09 17:25:46	going to vent
+07-09 17:25:46	0 tasks given 0 done
+07-09 17:25:46	(0 timeouts)	finished in: 0.000155
+07-09 17:25:46	-k- 8.39204409885
+07-09 17:25:46	***    hypercube:
+07-09 17:25:46	going to vent
+07-09 17:25:46	140 tasks given 0 done
+07-09 17:25:47	(0 timeouts)	finished in: 1.592688
+07-09 17:25:48	-s- 8.39204409885
+07-09 17:25:48	    simul:    8.39204410 (0.00000000)
+07-09 17:25:48	    score: 0.43
+07-09 17:25:48	    schlinge average 1.500000
+07-09 17:25:48	going to vent
+07-09 17:25:48	20 tasks given 0 done
+07-09 17:25:48	(0 timeouts)	finished in: 0.104747
+07-09 17:25:48	
+07-09 17:25:48	iteration: 10 total simulations: 280
+07-09 17:25:48	len chaines: 20
+07-09 17:25:48	(20, 0)
+07-09 17:25:48	    brute_force iterations: chaines: 20
+07-09 17:25:48	    candidates for predict: 0
+07-09 17:25:48	    time: -0.000063
+07-09 17:25:48	    candidates better: 0
+07-09 17:25:48	    candidates < 0: 0
+07-09 17:25:48	going to vent
+07-09 17:25:48	0 tasks given 0 done
+07-09 17:25:48	(0 timeouts)	finished in: 0.000139
+07-09 17:25:48	-k- 8.39204409885
+07-09 17:25:48	***    hypercube:
+07-09 17:25:48	going to vent
+07-09 17:25:48	140 tasks given 0 done
+07-09 17:25:51	(0 timeouts)	finished in: 2.700973
+07-09 17:25:52	-s- 8.39204409885
+07-09 17:25:52	    simul:    8.39204410 (0.00000000)
+07-09 17:25:52	    score: 0.52
+07-09 17:25:52	    schlinge average 1.450000
+07-09 17:25:52	going to vent
+07-09 17:25:52	20 tasks given 0 done
+07-09 17:25:52	(0 timeouts)	finished in: 0.284873
+07-09 17:25:52	
+07-09 17:25:52	iteration: 11 total simulations: 300
+07-09 17:25:52	len chaines: 20
+07-09 17:25:52	(20, 0)
+07-09 17:25:52	    brute_force iterations: chaines: 20
+07-09 17:25:52	    candidates for predict: 0
+07-09 17:25:52	    time: -0.000067
+07-09 17:25:52	    candidates better: 0
+07-09 17:25:52	    candidates < 0: 0
+07-09 17:25:52	going to vent
+07-09 17:25:52	0 tasks given 0 done
+07-09 17:25:52	(0 timeouts)	finished in: 0.000141
+07-09 17:25:52	-k- 8.39204409885
+07-09 17:25:52	***    hypercube:
+07-09 17:25:52	going to vent
+07-09 17:25:52	140 tasks given 0 done
+07-09 17:25:55	(0 timeouts)	finished in: 2.470033
+07-09 17:25:55	-s- 8.39204409885
+07-09 17:25:55	    simul:    8.39204410 (0.00000000)
+07-09 17:25:55	    score: 0.54
+07-09 17:25:55	    schlinge average 1.400000
+07-09 17:25:55	going to vent
+07-09 17:25:55	20 tasks given 0 done
+07-09 17:25:55	(0 timeouts)	finished in: 0.156629
+07-09 17:25:55	
+07-09 17:25:55	iteration: 12 total simulations: 320
+07-09 17:25:56	len chaines: 20
+07-09 17:25:56	(20, 0)
+07-09 17:25:56	    brute_force iterations: chaines: 20
+07-09 17:25:56	    candidates for predict: 0
+07-09 17:25:56	    time: -0.000068
+07-09 17:25:56	    candidates better: 0
+07-09 17:25:56	    candidates < 0: 0
+07-09 17:25:56	going to vent
+07-09 17:25:56	0 tasks given 0 done
+07-09 17:25:56	(0 timeouts)	finished in: 0.000143
+07-09 17:25:56	-k- 8.39204409885
+07-09 17:25:56	***    hypercube:
+07-09 17:25:56	going to vent
+07-09 17:25:56	140 tasks given 0 done
+07-09 17:45:45	tcp://*:5558
+07-09 17:45:46	loaded 320
+07-09 17:45:46	
+07-09 17:45:46	iteration: 0 total simulations: 320
+07-09 17:45:46	len chaines: 20
+07-09 17:45:46	(20, 0)
+07-09 17:45:46	    brute_force iterations: chaines: 20
+07-09 17:45:46	    candidates for predict: 0
+07-09 17:45:46	    time: -0.000073
+07-09 17:45:46	    candidates better: 0
+07-09 17:45:46	    candidates < 0: 0
+07-09 17:45:46	going to vent
+07-09 17:45:46	0 tasks given 0 done
+07-09 17:45:46	(0 timeouts)	finished in: 0.000153
+07-09 17:45:46	-k- 8.39204409885
+07-09 17:45:46	***    hypercube:
+07-09 17:45:46	going to vent
+07-09 17:45:46	140 tasks given 0 done
+07-09 17:45:51	(0 timeouts)	finished in: 5.363900
+07-09 17:45:52	-s- 8.39204409885
+07-09 17:45:52	    simul:    8.39204410 (0.00000000)
+07-09 17:45:52	    score: 0.49
+07-09 17:45:52	    schlinge average 1.950000
+07-09 17:45:52	going to vent
+07-09 17:45:52	20 tasks given 0 done
+07-09 17:45:53	(0 timeouts)	finished in: 1.038918
+07-09 17:46:34	tcp://*:5558
+07-09 17:46:35	loaded 340
+07-09 17:46:35	
+07-09 17:46:35	iteration: 0 total simulations: 340
+07-09 17:46:35	len chaines: 20
+07-09 17:46:35	(20, 0)
+07-09 17:46:35	    brute_force iterations: chaines: 20
+07-09 17:46:35	    candidates for predict: 3072
+07-09 17:46:45	    time: -10.451356
+07-09 17:46:45	    candidates better: 22
+07-09 17:46:45	    candidates < 0: 0
+07-09 17:46:45	going to vent
+07-09 17:46:45	154 tasks given 0 done
+07-09 17:46:47	(0 timeouts)	finished in: 1.266469
+07-09 17:46:48	-k- 8.39204409885
+07-09 17:46:48	***    hypercube:
+07-09 17:46:48	going to vent
+07-09 17:46:48	140 tasks given 0 done
+07-09 17:46:51	(0 timeouts)	finished in: 3.259535
+07-09 17:46:52	-s- 8.39204409885
+07-09 17:46:52	    simul:    8.39204410 (0.00000000)
+07-09 17:46:52	    score: 0.42
+07-09 17:46:52	    schlinge average 1.950000
+07-09 17:46:52	going to vent
+07-09 17:46:52	20 tasks given 0 done
+07-09 17:46:52	(0 timeouts)	finished in: 0.244832
+07-09 17:47:50	tcp://*:5558
+07-09 17:47:51	loaded 382
+07-09 17:47:51	
+07-09 17:47:51	iteration: 0 total simulations: 382
+07-09 17:47:51	len chaines: 20
+07-09 17:47:51	(20, 0)
+07-09 17:47:51	    brute_force iterations: chaines: 20
+07-09 17:47:51	    candidates for predict: 0
+07-09 17:47:51	    time: -0.000094
+07-09 17:47:51	    candidates better: 0
+07-09 17:47:51	    candidates < 0: 0
+07-09 17:47:51	going to vent
+07-09 17:47:51	0 tasks given 0 done
+07-09 17:47:51	(0 timeouts)	finished in: 0.000155
+07-09 17:47:51	-k- 8.39204409885
+07-09 17:47:51	***    hypercube:
+07-09 17:47:51	going to vent
+07-09 17:47:51	140 tasks given 0 done
+07-09 17:47:54	(0 timeouts)	finished in: 3.037730
+07-09 17:47:54	-s- 8.39204409885
+07-09 17:47:54	    simul:    8.39204410 (0.00000000)
+07-09 17:47:54	    score: 0.56
+07-09 17:47:54	    schlinge average 1.950000
+07-09 17:47:54	going to vent
+07-09 17:47:54	20 tasks given 0 done
+07-09 17:47:55	(0 timeouts)	finished in: 0.272451
+07-09 17:47:55	going to vent
+07-09 17:47:55	20 tasks given 0 done
+07-09 17:47:55	(0 timeouts)	finished in: 0.260405
+07-09 17:47:55	
+07-09 17:47:55	iteration: 1 total simulations: 402
+07-09 17:47:55	len chaines: 20
+07-09 17:47:55	(20, 0)
+07-09 17:47:55	    brute_force iterations: chaines: 20
+07-09 17:47:55	    candidates for predict: 0
+07-09 17:47:55	    time: -0.000071
+07-09 17:47:55	    candidates better: 0
+07-09 17:47:55	    candidates < 0: 0
+07-09 17:47:55	going to vent
+07-09 17:47:55	0 tasks given 0 done
+07-09 17:47:55	(0 timeouts)	finished in: 0.000139
+07-09 17:47:55	-k- 8.39204409885
+07-09 17:47:55	***    hypercube:
+07-09 17:47:55	going to vent
+07-09 17:47:55	140 tasks given 0 done
+07-09 17:47:58	(0 timeouts)	finished in: 2.765831
+07-09 17:47:59	-s- 8.39204409885
+07-09 17:47:59	    simul:    8.39204410 (0.00000000)
+07-09 17:47:59	    score: 0.58
+07-09 17:47:59	    schlinge average 1.900000
+07-09 17:47:59	going to vent
+07-09 17:47:59	20 tasks given 0 done
+07-09 17:47:59	(0 timeouts)	finished in: 0.168087
+07-09 17:47:59	going to vent
+07-09 17:47:59	20 tasks given 0 done
+07-09 17:47:59	(0 timeouts)	finished in: 0.191479
+07-09 17:47:59	
+07-09 17:47:59	iteration: 2 total simulations: 422
+07-09 17:47:59	len chaines: 20
+07-09 17:47:59	(20, 0)
+07-09 17:47:59	    brute_force iterations: chaines: 20
+07-09 17:47:59	    candidates for predict: 0
+07-09 17:47:59	    time: -0.000101
+07-09 17:47:59	    candidates better: 0
+07-09 17:47:59	    candidates < 0: 0
+07-09 17:47:59	going to vent
+07-09 17:47:59	0 tasks given 0 done
+07-09 17:47:59	(0 timeouts)	finished in: 0.000217
+07-09 17:47:59	-k- 8.39204409885
+07-09 17:47:59	***    hypercube:
+07-09 17:47:59	going to vent
+07-09 17:47:59	140 tasks given 0 done
+07-09 17:48:02	(0 timeouts)	finished in: 2.875013
+07-09 17:48:03	-s- 8.39204409885
+07-09 17:48:03	    simul:    8.39204410 (0.00000000)
+07-09 17:48:03	    score: 0.59
+07-09 17:48:03	    schlinge average 1.850000
+07-09 17:48:03	going to vent
+07-09 17:48:03	20 tasks given 0 done
+07-09 17:48:03	(0 timeouts)	finished in: 0.120735
+07-09 17:48:03	going to vent
+07-09 17:48:03	20 tasks given 0 done
+07-09 17:48:03	(0 timeouts)	finished in: 0.181313
+07-09 17:48:03	
+07-09 17:48:03	iteration: 3 total simulations: 442
+07-09 17:48:03	len chaines: 20
+07-09 17:48:03	(20, 0)
+07-09 17:48:03	    brute_force iterations: chaines: 20
+07-09 17:48:03	    candidates for predict: 0
+07-09 17:48:03	    time: -0.000066
+07-09 17:48:03	    candidates better: 0
+07-09 17:48:03	    candidates < 0: 0
+07-09 17:48:03	going to vent
+07-09 17:48:03	0 tasks given 0 done
+07-09 17:48:03	(0 timeouts)	finished in: 0.000139
+07-09 17:48:03	-k- 8.39204409885
+07-09 17:48:03	***    hypercube:
+07-09 17:48:03	going to vent
+07-09 17:48:03	140 tasks given 0 done
+07-09 17:48:06	(0 timeouts)	finished in: 2.728831
+07-09 17:48:07	-s- 8.39204409885
+07-09 17:48:07	    simul:    8.39204410 (0.00000000)
+07-09 17:48:07	    score:  0.5
+07-09 17:48:07	    schlinge average 1.800000
+07-09 17:48:07	going to vent
+07-09 17:48:07	20 tasks given 0 done
+07-09 17:48:07	(0 timeouts)	finished in: 0.116020
+07-09 17:48:07	going to vent
+07-09 17:48:07	20 tasks given 0 done
+07-09 17:48:07	(0 timeouts)	finished in: 0.173160
+07-09 17:48:07	
+07-09 17:48:07	iteration: 4 total simulations: 462
+07-09 17:48:07	len chaines: 20
+07-09 17:48:07	(20, 0)
+07-09 17:48:07	    brute_force iterations: chaines: 20
+07-09 17:48:07	    candidates for predict: 0
+07-09 17:48:07	    time: -0.000068
+07-09 17:48:07	    candidates better: 0
+07-09 17:48:07	    candidates < 0: 0
+07-09 17:48:07	going to vent
+07-09 17:48:07	0 tasks given 0 done
+07-09 17:48:07	(0 timeouts)	finished in: 0.001562
+07-09 17:48:07	-k- 8.39204409885
+07-09 17:48:07	***    hypercube:
+07-09 17:48:07	going to vent
+07-09 17:48:07	140 tasks given 0 done
+07-09 17:48:09	(0 timeouts)	finished in: 1.641951
+07-09 17:48:10	-s- 8.39204409885
+07-09 17:48:10	    simul:    8.39204410 (0.00000000)
+07-09 17:48:10	    score: 0.48
+07-09 17:48:10	    schlinge average 1.750000
+07-09 17:48:10	going to vent
+07-09 17:48:10	20 tasks given 0 done
+07-09 17:48:10	(0 timeouts)	finished in: 0.215759
+07-09 17:48:10	going to vent
+07-09 17:48:10	20 tasks given 0 done
+07-09 17:48:10	(0 timeouts)	finished in: 0.206312
+07-09 17:48:10	
+07-09 17:48:10	iteration: 5 total simulations: 482
+07-09 17:48:10	len chaines: 20
+07-09 17:48:10	(20, 0)
+07-09 17:48:10	    brute_force iterations: chaines: 20
+07-09 17:48:10	    candidates for predict: 2880
+07-09 17:48:24	    time: -13.657611
+07-09 17:48:24	    candidates better: 20
+07-09 17:48:24	    candidates < 0: 0
+07-09 17:48:24	going to vent
+07-09 17:48:24	140 tasks given 0 done
+07-09 17:48:24	(0 timeouts)	finished in: 0.321931
+07-09 17:48:25	-k- 8.39204409885
+07-09 17:48:25	***    hypercube:
+07-09 17:48:25	going to vent
+07-09 17:48:25	140 tasks given 0 done
+07-09 17:48:27	(0 timeouts)	finished in: 2.063221
+07-09 17:48:28	-s- 8.39204409885
+07-09 17:48:28	    simul:    8.39204410 (0.00000000)
+07-09 17:48:28	    score: 0.63
+07-09 17:48:28	    schlinge average 1.700000
+07-09 17:48:28	going to vent
+07-09 17:48:28	20 tasks given 0 done
+07-09 17:48:29	(0 timeouts)	finished in: 1.469717
+07-09 17:48:29	going to vent
+07-09 17:48:29	20 tasks given 0 done
+07-09 17:48:32	(0 timeouts)	finished in: 2.616056
+07-09 17:48:32	
+07-09 17:48:32	iteration: 6 total simulations: 522
+07-09 17:48:32	len chaines: 20
+07-09 17:48:32	(20, 0)
+07-09 17:48:32	    brute_force iterations: chaines: 20
+07-09 17:48:32	    candidates for predict: 0
+07-09 17:48:32	    time: -0.000067
+07-09 17:48:32	    candidates better: 0
+07-09 17:48:32	    candidates < 0: 0
+07-09 17:48:32	going to vent
+07-09 17:48:32	0 tasks given 0 done
+07-09 17:48:32	(0 timeouts)	finished in: 0.000139
+07-09 17:48:32	-k- 8.39204409885
+07-09 17:48:32	***    hypercube:
+07-09 17:48:32	going to vent
+07-09 17:48:32	140 tasks given 0 done
+07-09 17:48:34	(0 timeouts)	finished in: 2.192699
+07-09 17:48:35	-s- 8.39204409885
+07-09 17:48:35	    simul:    8.39204410 (0.00000000)
+07-09 17:48:35	    score:  0.5
+07-09 17:48:35	    schlinge average 1.650000
+07-09 17:48:35	going to vent
+07-09 17:48:35	20 tasks given 0 done
+07-09 17:48:38	(0 timeouts)	finished in: 2.356124
+07-09 17:48:38	going to vent
+07-09 17:48:38	20 tasks given 0 done
+07-09 17:48:39	(0 timeouts)	finished in: 1.302218
+07-09 17:48:39	
+07-09 17:48:39	iteration: 7 total simulations: 542
+07-09 17:48:39	len chaines: 20
+07-09 17:48:39	(20, 0)
+07-09 17:48:39	    brute_force iterations: chaines: 20
+07-09 17:48:39	    candidates for predict: 0
+07-09 17:48:39	    time: -0.000081
+07-09 17:48:39	    candidates better: 0
+07-09 17:48:39	    candidates < 0: 0
+07-09 17:48:39	going to vent
+07-09 17:48:39	0 tasks given 0 done
+07-09 17:48:39	(0 timeouts)	finished in: 0.000144
+07-09 17:48:39	-k- 8.39204409885
+07-09 17:48:39	***    hypercube:
+07-09 17:48:39	going to vent
+07-09 17:48:39	140 tasks given 0 done
+07-09 17:48:42	(0 timeouts)	finished in: 2.636446
+07-09 17:48:43	-s- 8.39204409885
+07-09 17:48:43	    simul:    8.39204410 (0.00000000)
+07-09 17:48:43	    score:  0.6
+07-09 17:48:43	    schlinge average 1.600000
+07-09 17:48:43	going to vent
+07-09 17:48:43	20 tasks given 0 done
+07-09 17:48:43	(0 timeouts)	finished in: 0.172924
+07-09 17:48:43	going to vent
+07-09 17:48:43	20 tasks given 0 done
+07-09 17:48:43	(0 timeouts)	finished in: 0.171182
+07-09 17:48:43	
+07-09 17:48:43	iteration: 8 total simulations: 562
+07-09 17:48:43	len chaines: 20
+07-09 17:48:43	(20, 0)
+07-09 17:48:43	    brute_force iterations: chaines: 20
+07-09 17:48:43	    candidates for predict: 0
+07-09 17:48:43	    time: -0.000069
+07-09 17:48:43	    candidates better: 0
+07-09 17:48:43	    candidates < 0: 0
+07-09 17:48:43	going to vent
+07-09 17:48:43	0 tasks given 0 done
+07-09 17:48:43	(0 timeouts)	finished in: 0.000158
+07-09 17:48:43	-k- 8.39204409885
+07-09 17:48:43	***    hypercube:
+07-09 17:48:43	going to vent
+07-09 17:48:43	140 tasks given 0 done
+07-09 17:48:46	(0 timeouts)	finished in: 2.720176
+07-09 17:48:47	-s- 8.39204409885
+07-09 17:48:47	    simul:    8.39204410 (0.00000000)
+07-09 17:48:47	    score: 0.55
+07-09 17:48:47	    schlinge average 1.550000
+07-09 17:48:47	going to vent
+07-09 17:48:47	20 tasks given 0 done
+07-09 17:48:47	(0 timeouts)	finished in: 0.117525
+07-09 17:48:47	going to vent
+07-09 17:48:47	20 tasks given 0 done
+07-09 17:48:47	(0 timeouts)	finished in: 0.151952
+07-09 17:48:47	
+07-09 17:48:47	iteration: 9 total simulations: 582
+07-09 17:48:47	len chaines: 20
+07-09 17:48:47	(20, 0)
+07-09 17:48:47	    brute_force iterations: chaines: 20
+07-09 17:48:47	    candidates for predict: 0
+07-09 17:48:47	    time: -0.000070
+07-09 17:48:47	    candidates better: 0
+07-09 17:48:47	    candidates < 0: 0
+07-09 17:48:47	going to vent
+07-09 17:48:47	0 tasks given 0 done
+07-09 17:48:47	(0 timeouts)	finished in: 0.000163
+07-09 17:48:47	-k- 8.39204409885
+07-09 17:48:47	***    hypercube:
+07-09 17:48:47	going to vent
+07-09 17:48:47	140 tasks given 0 done
+07-09 17:48:50	(0 timeouts)	finished in: 2.380483
+07-09 17:48:51	-s- 8.39204409885
+07-09 17:48:51	    simul:    8.39204410 (0.00000000)
+07-09 17:48:51	    score:  0.6
+07-09 17:48:51	    schlinge average 1.500000
+07-09 17:48:51	going to vent
+07-09 17:48:51	20 tasks given 0 done
+07-09 17:48:52	(0 timeouts)	finished in: 1.388192
+07-09 17:48:52	going to vent
+07-09 17:48:52	20 tasks given 0 done
+07-09 17:48:55	(0 timeouts)	finished in: 2.380905
+07-09 17:48:55	
+07-09 17:48:55	iteration: 10 total simulations: 602
+07-09 17:48:55	len chaines: 20
+07-09 17:48:55	(20, 0)
+07-09 17:48:55	    brute_force iterations: chaines: 20
+07-09 17:48:55	    candidates for predict: 0
+07-09 17:48:55	    time: -0.000068
+07-09 17:48:55	    candidates better: 0
+07-09 17:48:55	    candidates < 0: 0
+07-09 17:48:55	going to vent
+07-09 17:48:55	0 tasks given 0 done
+07-09 17:48:55	(0 timeouts)	finished in: 0.000142
+07-09 17:48:55	-k- 8.39204409885
+07-09 17:48:55	***    hypercube:
+07-09 17:48:55	going to vent
+07-09 17:48:55	140 tasks given 0 done
+07-09 17:48:57	(0 timeouts)	finished in: 2.593747
+07-09 17:48:58	-s- 8.39204409885
+07-09 17:48:58	    simul:    8.39204410 (0.00000000)
+07-09 17:48:58	    score: 0.49
+07-09 17:48:58	    schlinge average 1.450000
+07-09 17:48:58	going to vent
+07-09 17:48:58	20 tasks given 0 done
+07-09 17:48:59	(0 timeouts)	finished in: 0.836464
+07-09 17:48:59	going to vent
+07-09 17:48:59	20 tasks given 0 done
+07-09 17:48:59	(0 timeouts)	finished in: 0.154623
+07-09 17:48:59	
+07-09 17:48:59	iteration: 11 total simulations: 622
+07-09 17:49:00	len chaines: 20
+07-09 17:49:00	(20, 0)
+07-09 17:49:00	    brute_force iterations: chaines: 20
+07-09 17:49:00	    candidates for predict: 0
+07-09 17:49:00	    time: -0.000068
+07-09 17:49:00	    candidates better: 0
+07-09 17:49:00	    candidates < 0: 0
+07-09 17:49:00	going to vent
+07-09 17:49:00	0 tasks given 0 done
+07-09 17:49:00	(0 timeouts)	finished in: 0.000142
+07-09 17:49:00	-k- 8.39204409885
+07-09 17:49:00	***    hypercube:
+07-09 17:49:00	going to vent
+07-09 17:49:00	140 tasks given 0 done
+07-09 17:49:02	(0 timeouts)	finished in: 2.621535
+07-09 17:49:03	-s- 8.39204409885
+07-09 17:49:03	    simul:    8.39204410 (0.00000000)
+07-09 17:49:03	    score: 0.64
+07-09 17:49:03	    schlinge average 1.400000
+07-09 17:49:03	going to vent
+07-09 17:49:03	20 tasks given 0 done
+07-09 17:49:03	(0 timeouts)	finished in: 0.170138
+07-09 17:49:03	going to vent
+07-09 17:49:03	20 tasks given 0 done
+07-09 17:49:04	(0 timeouts)	finished in: 0.761476
+07-09 17:49:04	
+07-09 17:49:04	iteration: 12 total simulations: 642
+07-09 17:49:04	len chaines: 20
+07-09 17:49:04	(20, 0)
+07-09 17:49:04	    brute_force iterations: chaines: 20
+07-09 17:49:04	    candidates for predict: 0
+07-09 17:49:04	    time: -0.000070
+07-09 17:49:04	    candidates better: 0
+07-09 17:49:04	    candidates < 0: 0
+07-09 17:49:04	going to vent
+07-09 17:49:04	0 tasks given 0 done
+07-09 17:49:04	(0 timeouts)	finished in: 0.000142
+07-09 17:49:04	-k- 8.39204409885
+07-09 17:49:04	***    hypercube:
+07-09 17:49:04	going to vent
+07-09 17:49:04	140 tasks given 0 done
+07-09 17:49:07	(0 timeouts)	finished in: 2.728208
+07-09 17:49:08	-s- 8.39204409885
+07-09 17:49:08	    simul:    8.39204410 (0.00000000)
+07-09 17:49:08	    score: 0.57
+07-09 17:49:08	    schlinge average 1.350000
+07-09 17:49:08	going to vent
+07-09 17:49:08	20 tasks given 0 done
+07-09 17:49:09	(0 timeouts)	finished in: 1.292072
+07-09 17:49:09	going to vent
+07-09 17:49:09	20 tasks given 0 done
+07-09 17:49:12	(0 timeouts)	finished in: 2.266585
+07-09 17:49:12	
+07-09 17:49:12	iteration: 13 total simulations: 662
+07-09 17:49:12	len chaines: 20
+07-09 17:49:12	(20, 0)
+07-09 17:49:12	    brute_force iterations: chaines: 20
+07-09 17:49:12	    candidates for predict: 0
+07-09 17:49:12	    time: -0.000070
+07-09 17:49:12	    candidates better: 0
+07-09 17:49:12	    candidates < 0: 0
+07-09 17:49:12	going to vent
+07-09 17:49:12	0 tasks given 0 done
+07-09 17:49:12	(0 timeouts)	finished in: 0.000138
+07-09 17:49:12	-k- 8.39204409885
+07-09 17:49:12	***    hypercube:
+07-09 17:49:12	going to vent
+07-09 17:49:12	140 tasks given 0 done
+07-09 17:49:15	(0 timeouts)	finished in: 2.595827
+07-09 17:49:16	-s- 8.39204409885
+07-09 17:49:16	    simul:    8.39204410 (0.00000000)
+07-09 17:49:16	    score: 0.64
+07-09 17:49:16	    schlinge average 1.300000
+07-09 17:49:16	going to vent
+07-09 17:49:16	20 tasks given 0 done
+07-09 17:49:16	(0 timeouts)	finished in: 0.176319
+07-09 17:49:16	going to vent
+07-09 17:49:16	20 tasks given 0 done
+07-09 17:49:16	(0 timeouts)	finished in: 0.172037
+07-09 17:49:16	
+07-09 17:49:16	iteration: 14 total simulations: 682
+07-09 17:49:16	len chaines: 20
+07-09 17:49:16	(20, 0)
+07-09 17:49:16	    brute_force iterations: chaines: 20
+07-09 17:49:16	    candidates for predict: 0
+07-09 17:49:16	    time: -0.000069
+07-09 17:49:16	    candidates better: 0
+07-09 17:49:16	    candidates < 0: 0
+07-09 17:49:16	going to vent
+07-09 17:49:16	0 tasks given 0 done
+07-09 17:49:16	(0 timeouts)	finished in: 0.000140
+07-09 17:49:16	-k- 8.39204409885
+07-09 17:49:16	***    hypercube:
+07-09 17:49:16	going to vent
+07-09 17:49:16	140 tasks given 0 done
+07-09 17:49:19	(0 timeouts)	finished in: 2.547173
+07-09 17:49:20	-s- 8.39204409885
+07-09 17:49:20	    simul:    8.39204410 (0.00000000)
+07-09 17:49:20	    score: 0.58
+07-09 17:49:20	    schlinge average 1.250000
+07-09 17:49:20	going to vent
+07-09 17:49:20	20 tasks given 0 done
+07-09 17:49:20	(0 timeouts)	finished in: 0.132074
+07-09 17:49:20	going to vent
+07-09 17:49:20	20 tasks given 0 done
+07-09 17:49:20	(0 timeouts)	finished in: 0.089040
+07-09 17:49:20	
+07-09 17:49:20	iteration: 15 total simulations: 702
+07-09 17:49:20	len chaines: 20
+07-09 17:49:20	(20, 0)
+07-09 17:49:20	    brute_force iterations: chaines: 20
+07-09 17:49:20	    candidates for predict: 0
+07-09 17:49:20	    time: -0.000070
+07-09 17:49:20	    candidates better: 0
+07-09 17:49:20	    candidates < 0: 0
+07-09 17:49:20	going to vent
+07-09 17:49:20	0 tasks given 0 done
+07-09 17:49:20	(0 timeouts)	finished in: 0.000164
+07-09 17:49:20	-k- 8.39204409885
+07-09 17:49:20	***    hypercube:
+07-09 17:49:20	going to vent
+07-09 17:49:20	140 tasks given 0 done
+07-09 17:49:23	(0 timeouts)	finished in: 2.571937
+07-09 17:49:24	-s- 8.39204409885
+07-09 17:49:24	    simul:    8.39204410 (0.00000000)
+07-09 17:49:24	    score: 0.65
+07-09 17:49:24	    schlinge average 1.200000
+07-09 17:49:24	going to vent
+07-09 17:49:24	20 tasks given 0 done
+07-09 17:49:25	(0 timeouts)	finished in: 0.773467
+07-09 17:49:25	going to vent
+07-09 17:49:25	20 tasks given 0 done
+07-09 17:49:26	(0 timeouts)	finished in: 0.907944
+07-09 17:49:26	
+07-09 17:49:26	iteration: 16 total simulations: 722
+07-09 17:49:26	len chaines: 20
+07-09 17:49:26	(20, 0)
+07-09 17:49:26	    brute_force iterations: chaines: 20
+07-09 17:49:27	    candidates for predict: 1574640
+07-09 19:41:20	tcp://*:5558
+07-09 19:41:20	loaded 0
+07-09 19:41:21	going to vent
+07-09 19:41:21	3080 tasks given 0 done
+07-09 19:43:10	(0 timeouts)	finished in: 109.311921
+07-09 19:43:28	
+07-09 19:43:28	iteration: 0 total simulations: 440
+07-09 19:43:28	len chaines: 2
+07-09 19:43:28	(2, 0)
+07-09 19:43:28	    brute_force iterations: chaines: 2
+07-09 19:43:28	    candidates for predict: 9801
+07-09 19:44:10	    time: -42.047712
+07-09 19:44:10	    candidates better: 7
+07-09 19:44:10	    candidates < 0: 742
+07-09 19:44:10	/// 742 negative values
+07-09 19:44:10	going to vent
+07-09 19:44:10	49 tasks given 0 done
+07-09 19:44:35	(0 timeouts)	finished in: 24.147184
+07-09 19:44:35	-k- 1.37842865161
+07-09 19:44:35	***    hypercube:
+07-09 19:44:36	going to vent
+07-09 19:44:36	3080 tasks given 0 done
+07-09 19:46:34	(0 timeouts)	finished in: 118.653830
+07-09 19:47:05	-s- 1.37842865161
+07-09 19:47:05	    simul:    1.37842865 (0.00000000)
+07-09 19:47:05	    score: -2e+02
+07-09 19:47:05	    schlinge average 1.950000
+07-09 19:47:05	going to vent
+07-09 19:47:05	20 tasks given 0 done
+07-09 19:47:06	(0 timeouts)	finished in: 1.023633
+07-09 19:47:06	going to vent
+07-09 19:47:06	20 tasks given 0 done
+07-09 19:47:08	(0 timeouts)	finished in: 1.634045
+07-09 19:47:08	
+07-09 19:47:08	iteration: 1 total simulations: 887
+07-09 19:47:08	len chaines: 2
+07-09 19:47:08	(2, 0)
+07-09 19:47:08	    brute_force iterations: chaines: 2
+07-09 19:47:08	    candidates for predict: 9801
+07-09 19:48:32	    time: -83.320408
+07-09 19:48:32	    candidates better: 428
+07-09 19:48:32	    candidates < 0: 0
+07-09 19:48:33	going to vent
+07-09 19:48:33	2996 tasks given 0 done
