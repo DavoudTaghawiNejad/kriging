@@ -12,7 +12,21 @@ from sklearn import gaussian_process
 import json
 import dataset
 from hashlib import sha224
+from collections import defaultdict, MutableMapping
+import logging
 
+logger = logging.getLogger('kriging')
+logger.setLevel(logging.INFO)
+fh = logging.FileHandler('kriging.log')
+fh.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter_stream = logging.Formatter('%(asctime)s\t%(message)s', datefmt='%H:%M:%S')
+formatter_file = logging.Formatter('%(asctime)s\t%(message)s', datefmt='%m-%d %H:%M:%S')
+fh.setFormatter(formatter_file)
+ch.setFormatter(formatter_stream)
+logger.addHandler(fh)
+logger.addHandler(ch)
 
 
 class Kriging:
@@ -29,16 +43,15 @@ class Kriging:
         overview.insert({'hash': hash, 'json_string': parameters})
         self.db = self._db[hash]
 
-
         self.simulations = SimulationSet()
         for row in self.db:
             try:
                 input = json.loads(row['input'])
                 output = json.loads(row['output'])
             except TypeError:
-                print row['output']
+                logger.info(row['output'])
             self.simulations.insert(input, output)
-        print("loaded %i" % len(self.simulations))
+        logger.info("loaded %i" % len(self.simulations))
 
         if len(self.simulations) < initial_runs:
             middle_point = InputSet.middle_point()
@@ -48,7 +61,7 @@ class Kriging:
     def print_dict(self):
         inputset = InputSet()
         inputset.insert(InputSet.middle_point())
-        print(dict(inputset[0]))
+        logger.info(dict(inputset[0]))
 
     def kriging(self, sweep_intervals='', batch_size=28, success=0.01, schlinge_start=2.0, schlinge_change=0.05):
         gp = gaussian_process.GaussianProcess(
@@ -64,30 +77,30 @@ class Kriging:
         stats_innovation_simulation = 0
         stats_iterations = 0
         while True:
-            print("")
-            print("iteration: %i total simulations: %i" % (stats_iterations, len(self.simulations)))
+            logger.info("")
+            logger.info("iteration: %i total simulations: %i" % (stats_iterations, len(self.simulations)))
             old_best = self.simulations.best()
             kriging_candidates = kriger(self.simulations, InputSet, sweep_intervals, schlinge, batch_size, gp)
             kriging_candidates = self.run_add(kriging_candidates)
             kriging_candidate_is_better, kriging_candidate, num_better = self.candidates_better(old_best, kriging_candidates)
             if kriging_candidate_is_better:
-                print("+k+ %s (%s) better: %i" % (kriging_candidate[1], old_best[1], num_better))
+                logger.info("+k+ %s (%s) better: %i" % (kriging_candidate[1], old_best[1], num_better))
                 stats_innovation_kriging += 1
                 candidate = kriging_candidate
             else:
-                print("-k- %s" % kriging_candidate[1])
+                logger.info("-k- %s" % kriging_candidate[1])
                 candidate = old_best
 
-            print("***    hypercube:")
+            logger.info("***    hypercube:")
             simulation_candidates = hypercube(candidate[0], schlinge, InputSet.lb, InputSet.ub, batch_size)
             simulation_candidates = self.run_add(simulation_candidates)
             simulation_candidate_is_better, simulation_candidate, num_better = self.candidates_better(candidate, simulation_candidates)
             if simulation_candidate_is_better:
-                print("+s+ %s (%s) better: %i" % (simulation_candidate[1], candidate[1], num_better))
+                logger.info("+s+ %s (%s) better: %i" % (simulation_candidate[1], candidate[1], num_better))
                 stats_innovation_simulation += 1
                 candidate = simulation_candidate
             else:
-                print("-s- %s" % simulation_candidate[1])
+                logger.info("-s- %s" % simulation_candidate[1])
 
             if not kriging_candidate_is_better and not simulation_candidate_is_better:
                 schlinge -= schlinge_change
@@ -96,31 +109,31 @@ class Kriging:
                 schlinge[schlinge < 0] = 0
                 schlinge = np.maximum(np.absolute(self.simulations.best()[0] - old_best[0]) / initial_distance, schlinge)
 
-            print("    simul:    %10.8f (%10.8f)" % (candidate[1], (old_best[1] - candidate[1])))
+            logger.info("    simul:    %10.8f (%10.8f)" % (candidate[1], (old_best[1] - candidate[1])))
             try:
                 score = gp.score(simulation_candidates.inputs, simulation_candidates.metrics)
-                print("    score: %4.2g" % score)
+                logger.info("    score: %4.2g" % score)
             except ValueError:
                 if len(simulation_candidates) > 1:
                     raise
-            print("    schlinge average %f" % np.mean(schlinge))
+            logger.info("    schlinge average %f" % np.mean(schlinge))
 
             #TODO pred = np.array([gp.predict(candidate[0]) for candidate in simulation_candidates], dtype=np.float64)
-            #TODO print("    mean prediction accuracy %f" % np.mean(np.absolute((simulation_candidates[0] - pred) / simulation_candidates[1])))
             stats_iterations += 1
+            #TODO logger.info("    mean prediction accuracy %f" % np.mean(np.absolute((simulation_candidates[0] - pred) / simulation_candidates[1])))
             if self.simulations.best()[1] < success:
                 break
             if (schlinge <= 0.001).all():
-                print("\n\n\ni  ----------- SCHLINGE RELEASED = 2 ---------------\n\n\n")
+                logger.info("\n\n\ni  ----------- SCHLINGE RELEASED = 2 ---------------\n\n\n")
                 schlinge.fill(2)
             key_pressed = get_key()
             if key_pressed == 'c' or key_pressed == 'i':
-                print("Schlinge %s" % str(schlinge))
-                print("innovation_simulation: %i" % stats_innovation_simulation)
-                print("innovation_kriging:    %i" % stats_innovation_kriging)
-                print("iterations             %i" % stats_iterations)
-                print("unique simulations     %i" % len(self.simulations))
-                print(self.simulations.best_dict())
+                logger.info("Schlinge %s" % str(schlinge))
+                logger.info("innovation_simulation: %i" % stats_innovation_simulation)
+                logger.info("innovation_kriging:    %i" % stats_innovation_kriging)
+                logger.info("iterations             %i" % stats_iterations)
+                logger.info("unique simulations     %i" % len(self.simulations))
+                logger.info(self.simulations.best_dict())
                 if key_pressed == 'c':
                     return self.simulations.best()
 

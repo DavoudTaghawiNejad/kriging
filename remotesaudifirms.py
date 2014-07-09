@@ -3,11 +3,13 @@ import zmq
 import json
 from time import time
 import sys
-flush = sys.stdout.flush
+import logging
+
+logger = logging.getLogger('kriging.kriger')
 
 class RemoteSaudiFirms:
     def __init__(self, task=5557, result=5558, kill=5559, address_prefix="tcp://*:"):
-        print address_prefix + str(result)
+        logger.info(address_prefix + str(result))
         self.context = zmq.Context()
         self.sender = self.context.socket(zmq.PUSH)
         self.sender.bind(address_prefix + str(task))
@@ -15,7 +17,7 @@ class RemoteSaudiFirms:
         self.receiver.bind(address_prefix + str(result))
         self.controller = self.context.socket(zmq.PUB)
         self.controller.bind(address_prefix + str(kill))
-        #print("start up Simulations and hit ENTER")
+        #logger.info("start up Simulations and hit ENTER")
         #raw_input()
         self.total_tasks = 0
 
@@ -32,18 +34,15 @@ class RemoteSaudiFirms:
             results.append(self.receiver.recv())
             done_tasks += 1
             print('\rdone: %i/%i time per task: %6.2f' % (done_tasks, self.total_tasks, done_tasks / (time() - t))),
-            flush()
         self.total_tasks = 0
         return results
 
     def run_D2D(self, jobs, repetitions):
-        print("going to vent"),
-        flush()
+        logger.info("going to vent"),
         t = time()
         for i in range(repetitions):
             self.vent(jobs)
-        print("\r%i tasks given 0 done" % self.total_tasks),
-        flush()
+        logger.info("\r%i tasks given 0 done" % self.total_tasks),
         work_done = []
         timeout = 0
         for element in self.sink():
@@ -54,12 +53,10 @@ class RemoteSaudiFirms:
             try:
                 work_done.append(return_json)
             except ValueError:
-                print("**********")
-                print(element)
-                print("**********")
+                logger.info("++++++++++")
+                logger.info(element)
                 raise
-        print("(%i timeouts)\tfinished in: %f" % (timeout, time() - t))
-        flush()
+        logger.info("(%i timeouts)\tfinished in: %f" % (timeout, time() - t))
         return work_done
 
     def kill(self, force=False):

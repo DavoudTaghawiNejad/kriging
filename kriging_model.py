@@ -5,6 +5,10 @@ import itertools
 import numpy as np
 from predictedset import PredictedSet
 from time import time
+import logging
+
+logger = logging.getLogger('kriging.kriger')
+
 
 def kriger(simulations, InputSet, sweep_intervals, schlinge, num_return_best, gp):
     gp.fit(simulations.inputs, simulations.metrics)
@@ -20,8 +24,8 @@ def kriger(simulations, InputSet, sweep_intervals, schlinge, num_return_best, gp
     assert (lb <= ub).all()
     index = range(len(lb))
     chaines = [[]] * len(lb)
-    print("len chaines: %i" % len(chaines))
-    print(np.array(chaines).shape)
+    logger.info("len chaines: %i" % len(chaines))
+    logger.info(np.array(chaines).shape)
     for i, l, u, slb, sub, d in zip(index, lb, ub, InputSet.lb, InputSet.ub, InputSet.dtypes):
         half_interval = (u - l) / sweep_intervals[i] / 2
         rnd = random.uniform(- half_interval, half_interval)
@@ -32,17 +36,17 @@ def kriger(simulations, InputSet, sweep_intervals, schlinge, num_return_best, gp
             chaines[i] = chaines[i][:-2]
         if l < slb:
             chaines[i] = chaines[i][1:]
-    print("    brute_force iterations: chaines: %i" % (len(chaines)))
-    print("    candidates for predict: %i" % len([_ for _ in itertools.product(*chaines)]))
+    logger.info("    brute_force iterations: chaines: %i" % (len(chaines)))
+    logger.info("    candidates for predict: %i" % len([_ for _ in itertools.product(*chaines)]))
     t = time()
     inputs, metrics, negative_values = lowest_values(num_return_best, len(lb), chaines, gp.predict, simulations)
-    print("    time: %f" % (t - time()))
-    print("    candidates better: %i" % len(inputs))
-    print("    candidates < 0: %i" % negative_values)
+    logger.info("    time: %f" % (t - time()))
+    logger.info("    candidates better: %i" % len(inputs))
+    logger.info("    candidates < 0: %i" % negative_values)
     candidates = PredictedSet()
     for inputs, metrics in zip(inputs, metrics):
         candidates.insert(inputs, metrics)
     if negative_values:
-        print("/// %i negative values" % negative_values)
+        logger.info("/// %i negative values" % negative_values)
     return candidates
 
