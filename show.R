@@ -1,0 +1,7 @@
+options(width=240)
+library("RSQLite")
+drv <- dbDriver("SQLite")
+con <- dbConnect(drv, "./test.sqlite3")
+dbListFields(con, "log_values")
+data = dbGetQuery(con, "Select * from log_values")
+library(rggobi)

@@ -1,6 +1,8 @@
 __author__ = 'taghawi'
 from commonset import get_two_hierarchies_of_keys
 import numpy as np
+from collections import  defaultdict
+from inputset import InputSet
 
 class SimulationSet:
     @staticmethod
@@ -18,9 +20,10 @@ class SimulationSet:
         for i in range(len(self.inputs)):
             if (self.inputs[i] == input).all():
                 self.metrics[i] = (self.metrics[i] + self.metric(output)) / 2
-                return
+                return False
         self.inputs.append(input)
         self.metrics.append(self.metric(output))
+        return True
 
     def __getitem__(self, item):
         """
@@ -42,18 +45,42 @@ class SimulationSet:
         output = encode(output, SimulationSet.output_keys)
         return sum(((SimulationSet.target - output) / SimulationSet.target) ** 2)
 
+    def average(self):
+        try:
+            return np.mean(self.metrics)
+        except ValueError:
+            return -1
+
     def best(self):
-        index = np.argmin(self.metrics)
+        try:
+            index = np.argmin(self.metrics)
+        except ValueError:
+            return (np.zeros(len(SimulationSet.input_keys)), -1)
         input = self.inputs[index]
         result = self.metrics[index]
         assert not(np.isnan(input).any())
         return input, result
 
+    def best_dict(self):
+        input, result = self.best()
+        d = defaultdict(dict)
+        i = 0
+        for category, key in SimulationSet.output_keys:
+            d[category][key] = input[i]
+            i += 1
+        return combine(InputSet.fixed_input, d, SimulationSet.output_keys)
+
     def __len__(self):
         return len(self.inputs)
 
 
-
-
 def encode(what, keys):
     return np.array([what[category][key] for category, key in keys])
+
+
+def combine(A, B, Bkeys):
+    combined = defaultdict(dict)
+    combined.update(A)
+    for category, key in Bkeys:
+        combined[category][key] = B[category][key]
+    return combined
