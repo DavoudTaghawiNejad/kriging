@@ -176,9 +176,10 @@ class Kriging:
         for row in raw_output:
             input = row['parameters']
             output = row['result']
-            self.simulations.insert(input, output)
+            new = self.simulations.insert(input, output)
             new_simulations.insert(input, output)
-            self.db.insert({'input': json.dumps(input), 'output': json.dumps(output)})
+            if new:
+                self.db.insert({'input': json.dumps(input), 'output': json.dumps(output)})
         return new_simulations
 
     def test(self, input, repetitions):
