@@ -7,7 +7,7 @@ from remotesaudifirms import RemoteSaudiFirms
 from kriging_model import kriger
 import numpy as np
 from copy import deepcopy
-from hypercube import hypercube
+from hypercube import centered_latin_hypercube_I
 from sklearn import gaussian_process
 import json
 import dataset
@@ -31,6 +31,7 @@ logger.addHandler(ch)
 
 class Kriging:
     def __init__(self, lower_limits, upper_limits, dtypes, fixed_parameters, target, initial_runs, repetitions, db_name):
+        print("v. 0.1")
         SimulationSet.setup(dtypes, target)
         InputSet.setup(lower_limits, upper_limits, dtypes, fixed_parameters)
         self.repetitions = repetitions
@@ -55,7 +56,7 @@ class Kriging:
 
         if len(self.simulations) < initial_runs:
             middle_point = InputSet.middle_point()
-            simulation_candidates = hypercube(middle_point, np.ones_like(middle_point), InputSet.lb, InputSet.ub, initial_runs)
+            simulation_candidates = centered_latin_hypercube_I(middle_point, np.ones_like(middle_point), InputSet.lb, InputSet.ub, initial_runs)
             self.run_add(simulation_candidates)
 
     def print_dict(self):
@@ -94,7 +95,7 @@ class Kriging:
                 candidate = old_best
 
             logger.info("***    hypercube:")
-            simulation_candidates = hypercube(candidate[0], schlinge, InputSet.lb, InputSet.ub, batch_size)
+            simulation_candidates = centered_latin_hypercube_I(candidate[0], schlinge, InputSet.lb, InputSet.ub, batch_size)
             simulation_candidates = self.run_add(simulation_candidates)
             simulation_candidate_is_better, simulation_candidate, num_better = self.candidates_better(candidate, simulation_candidates)
             if simulation_candidate_is_better:
@@ -139,7 +140,6 @@ class Kriging:
                     return self.simulations.best_dict()
             if key_pressed == 't':
                 logger.info(json.dumps(self.test(self.simulations.best_dict(), 20), indent=20))
-            logger.debug(json.dumps(self.test(self.simulations.best_dict(), 20), indent=20))
             log_data = {
                 'iteration': stats_iterations,
                 'average_kriging': kriging_candidates.average(),
@@ -149,7 +149,7 @@ class Kriging:
                 'total_average': self.simulations.average(),
                 'best': self.simulations.best()[RESULT]
             }
-            log_data.update(flatten(self.test(self.simulations.best_dict(), 20)))
+            log_data.update(self.test(self.simulations.best_dict(), 20))
 
             log_values.upsert(log_data, ['iteration'])
             stats_iterations += 1
@@ -189,7 +189,9 @@ class Kriging:
         for row in raw_output:
             for category, key in SimulationSet.output_keys:
                 output[category][key] += (1 / repetitions) * row['result'][category][key]
-        return output
+        ret = flatten(output, 'output')
+        ret.update(flatten(input, 'input'))
+        return ret
 
 
 def flatten(d, parent_key=''):

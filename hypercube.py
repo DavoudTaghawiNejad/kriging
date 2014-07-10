@@ -16,7 +16,7 @@ def _centered_latin_hypercube(center, schlinge, lb, ub, samples):
     return design * (ub - lb) + lb
 
 
-def centered_latin_hypercube(center, schlinge, lb, ub, samples):
+def centered_latin_hypercube_A(center, schlinge, lb, ub, samples):
     samples = max(samples, len(center))
     fields = np.logical_and(schlinge > .1, ub > lb)
     t_center = center[fields]
@@ -33,9 +33,12 @@ def centered_latin_hypercube(center, schlinge, lb, ub, samples):
             j += 1
         else:
             ret_lh[:, i] = np.array(center[i] * t_samples)  # ret_lh[:, i].fill(means[i])
+
+    return ret_lh
+
+def centered_latin_hypercube_I(center, schlinge, lb, ub, samples):
+    ret_lh = _centered_latin_hypercube(center, schlinge, lb, ub, samples)
     candidates = InputSet()
     for input in ret_lh:
         candidates.insert(input)
     return candidates
-
-hypercube = centered_latin_hypercube
