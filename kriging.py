@@ -1,7 +1,7 @@
 from __future__ import division
 from simulationset import SimulationSet
 from inputset import InputSet
-import inputset
+from split import split
 from keypress import Keypress
 from remotesaudifirms import RemoteSaudiFirms
 from kriging_model import kriger
@@ -14,6 +14,7 @@ import dataset
 from hashlib import sha224
 from collections import defaultdict, MutableMapping
 import logging
+
 
 logger = logging.getLogger('kriging')
 logger.setLevel(logging.INFO)
@@ -30,8 +31,9 @@ logger.addHandler(ch)
 
 
 class Kriging:
-    def __init__(self, lower_limits, upper_limits, dtypes, fixed_parameters, target, initial_runs, repetitions, db_name):
+    def __init__(self, parameters, target, repetitions, db_name):
         print("v. 0.1")
+        fixed_parameters, lower_limits, upper_limits, dtypes = split(parameters)
         SimulationSet.setup(dtypes, target)
         InputSet.setup(lower_limits, upper_limits, dtypes, fixed_parameters)
         self.repetitions = repetitions
@@ -45,6 +47,7 @@ class Kriging:
         overview.insert({'hash': hash, 'json_string': parameters})
         self.db = self._db[hash]
 
+    def initialize(self, initial_runs):
         self.simulations = SimulationSet()
         for row in self.db:
             try:
@@ -123,8 +126,8 @@ class Kriging:
 
             #TODO pred = np.array([gp.predict(candidate[0]) for candidate in simulation_candidates], dtype=np.float64)
             #TODO logger.info("    mean prediction accuracy %f" % np.mean(np.absolute((simulation_candidates[0] - pred) / simulation_candidates[1])))
-            if self.simulations.best()[1] < success:
-                break
+            if self.simulations.best()[RESULT] < success:
+                return self.simulations.best_dict(), self.test(self.simulations.best_dict(), 20)
             if (schlinge <= 0.001).all():
                 logger.info("\n\n\ni  ----------- SCHLINGE RELEASED = 2 ---------------\n\n\n")
                 schlinge.fill(2)
@@ -137,7 +140,7 @@ class Kriging:
                 logger.info("unique simulations     %i" % len(self.simulations))
                 logger.info(self.simulations.best_dict())
                 if key_pressed == 'c':
-                    return self.simulations.best_dict()
+                    return self.simulations.best_dict(), self.test(self.simulations.best_dict(), 20)
             if key_pressed == 't':
                 logger.info(json.dumps(self.test(self.simulations.best_dict(), 20), indent=20))
             log_data = {
