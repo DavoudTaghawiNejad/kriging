@@ -27,9 +27,9 @@ class SimulationSet:
 
     def __getitem__(self, item):
         """
-        returns a json-dictionary with simulation parameters
+        returns a numpy-array with simulation parameters
         :param item: number
-        :return: json with simulation input
+        :return: np.array with simulation input
         """
         return self.inputs[item], self.metrics[item]
 
@@ -55,7 +55,7 @@ class SimulationSet:
         try:
             index = np.argmin(self.metrics)
         except ValueError:
-            return (np.zeros(len(SimulationSet.input_keys)), -1)
+            return (np.zeros(len(SimulationSet.input_keys)), float("Inf"))
         input = self.inputs[index]
         result = self.metrics[index]
         assert not(np.isnan(input).any())
@@ -65,10 +65,10 @@ class SimulationSet:
         input, result = self.best()
         d = defaultdict(dict)
         i = 0
-        for category, key in SimulationSet.output_keys:
+        for category, key in SimulationSet.input_keys:
             d[category][key] = input[i]
             i += 1
-        return combine(InputSet.fixed_input, d, SimulationSet.output_keys)
+        return combine(InputSet.fixed_input, d, SimulationSet.input_keys)
 
     def __len__(self):
         return len(self.inputs)
