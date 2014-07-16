@@ -46,7 +46,10 @@ class RemoteSaudiFirms:
         work_done = []
         timeout = 0
         for element in self.sink():
-            return_json = json.loads(element)
+            try:
+                return_json = json.loads(element)
+            except ValueError:
+                raise ValueError(element)
             if return_json['result'] == "timeout":
                 timeout += 1
                 continue
