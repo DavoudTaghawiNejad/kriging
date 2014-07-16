@@ -1,4 +1,4 @@
-__author__ = 'taghawi'
+from __future__ import division
 from pyDOE import lhs
 from inputset import InputSet
 import numpy as np

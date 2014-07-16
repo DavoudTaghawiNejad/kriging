@@ -1,8 +1,8 @@
 
+from __future__ import division
 import zmq
 import json
 from time import time
-import sys
 import logging
 
 logger = logging.getLogger('kriging.kriger')

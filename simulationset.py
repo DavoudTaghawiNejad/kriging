@@ -1,4 +1,4 @@
-__author__ = 'taghawi'
+from __future__ import division
 from commonset import get_two_hierarchies_of_keys
 import numpy as np
 from collections import  defaultdict

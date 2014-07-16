@@ -1,4 +1,4 @@
-__author__ = 'taghawi'
+from __future__ import division
 from simulationset import SimulationSet
 from inputset import InputSet
 import inputset
