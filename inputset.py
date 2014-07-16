@@ -74,7 +74,18 @@ class InputSet(object):
     @staticmethod
     def middle_point():
         """ inserts the middle point of the hyperplain as an entry """
-        return InputSet.ub - InputSet.lb
+        return InputSet.lb + (InputSet.ub - InputSet.lb) / 2
+
+    @staticmethod
+    def weight_point(weight):
+        """ inserts the middle point of the hyperplain as an entry """
+        point = InputSet.lb + (weight * InputSet.ub - (1 - weight) * InputSet.lb) / 2
+        d = defaultdict(dict)
+        i = 0
+        for category, key in InputSet.keys:
+            d[category][key] = InputSet.dtypes[i](point[i])
+            i += 1
+        return dict(combine(InputSet.fixed_input, d, InputSet.keys))
 
     def __len__(self):
         return len(self.inputs)

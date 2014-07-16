@@ -35,7 +35,8 @@ class Kriging:
         SimulationSet.setup(dtypes, target)
         InputSet.setup(lower_limits, upper_limits, dtypes, fixed_parameters)
         self.repetitions = repetitions
-        self.remote_saudifirms = RemoteSaudiFirms()
+        self.remote_saudifirms = RemoteSaudiFirms(task=5007, result=5008, kill=5009)
+        self.local_saudifirms = RemoteSaudiFirms(task=5567, result=5568, kill=5569)
 
         self._db = dataset.connect("sqlite:///%s.sqlite3" % db_name)
         parameters = json.dumps(fixed_parameters)
@@ -149,9 +150,12 @@ class Kriging:
                 'best': self.simulations.best()[RESULT]
             }
             log_data.update(self.test(self.simulations.best_dict(), 20))
-
+            logger.info(self.test(self.simulations.best_dict(), 20))
             log_values.upsert(log_data, ['iteration'])
+            self.run_local(self.simulations.best_dict(), 1)
             stats_iterations += 1
+
+
 
     def candidates_better(self, old_best, candidates):
         best = deepcopy(old_best)
@@ -181,9 +185,10 @@ class Kriging:
                 self.db.insert({'input': json.dumps(input), 'output': json.dumps(output)})
         return new_simulations
 
-    def test(self, input, repetitions):
+    def run_local(self, input, repetitions=1):
         """ runs one input; returns simulation """
-        raw_output = self.remote_saudifirms.run_D2D([input], repetitions)
+        print("local1")
+        raw_output = self.local_saudifirms.run_D2D([input], repetitions)
         output = defaultdict(lambda: defaultdict(int))
         for row in raw_output:
             for category, key in SimulationSet.output_keys:
@@ -191,6 +196,22 @@ class Kriging:
         ret = flatten(output, 'output')
         ret.update(flatten(input, 'input'))
         return ret
+
+    def run_best(self):
+        self.run_local(self.simulations.best_dict())
+
+    def run_input(self, weight=0.5):
+        self.run_local(InputSet.weight_point(weight))
+
+
+    def test(self, input, repetitions):
+        """ runs one input; returns simulation """
+        raw_output = self.remote_saudifirms.run_D2D([input], repetitions)
+        output = defaultdict(lambda: defaultdict(int))
+        for row in raw_output:
+            for category, key in SimulationSet.output_keys:
+                output[category][key] += (1 / repetitions) * row['result'][category][key]
+        return flatten(output, '')
 
 
 def flatten(d, parent_key=''):
