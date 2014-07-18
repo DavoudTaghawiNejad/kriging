@@ -195,15 +195,9 @@ class Kriging:
 
     def run_local(self, input, repetitions=1):
         """ runs one input; returns simulation """
-        print("local1")
-        raw_output = self.local_saudifirms.run_D2D([input], repetitions)
-        output = defaultdict(lambda: defaultdict(int))
-        for row in raw_output:
-            for category, key in SimulationSet.output_keys:
-                output[category][key] += (1 / repetitions) * row['result'][category][key]
-        ret = flatten(output, 'output')
-        ret.update(flatten(input, 'input'))
-        return ret
+        print(" (local)")
+        self.local_saudifirms.vent([input])
+
 
     def run_best(self):
         self.run_local(self.simulations.best_dict())
@@ -215,7 +209,12 @@ class Kriging:
     def test(self, input, repetitions):
         """ runs one input; returns simulation """
         raw_output = self.remote_saudifirms.run_D2D([input], repetitions)
+        for row in raw_output:
+            input = row['parameters']
+            output = row['result']
+            self.simulations.insert(input, output)
         output = defaultdict(lambda: defaultdict(int))
+
         for row in raw_output:
             for category, key in SimulationSet.output_keys:
                 output[category][key] += (1 / repetitions) * row['result'][category][key]
