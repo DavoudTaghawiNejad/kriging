@@ -9,7 +9,7 @@ logger = logging.getLogger('kriging.kriger')
 
 class RemoteSaudiFirms:
     def __init__(self, task=5557, result=5558, kill=5559, address_prefix="tcp://*:"):
-        logger.info(address_prefix + str(result))
+        print(address_prefix + str(result))
         self.context = zmq.Context()
         self.sender = self.context.socket(zmq.PUSH)
         self.sender.bind(address_prefix + str(task))
@@ -38,11 +38,11 @@ class RemoteSaudiFirms:
         return results
 
     def run_D2D(self, jobs, repetitions):
-        logger.info("going to vent"),
+        print("going to vent"),
         t = time()
         for i in range(repetitions):
             self.vent(jobs)
-        logger.info("\r%i tasks given 0 done" % self.total_tasks),
+        print("\r%i tasks given 0 done" % self.total_tasks),
         work_done = []
         timeout = 0
         for element in self.sink():
@@ -59,7 +59,7 @@ class RemoteSaudiFirms:
                 logger.info("++++++++++")
                 logger.info(element)
                 raise
-        logger.info("(%i timeouts)\tfinished in: %f" % (timeout, time() - t))
+        print("(%i timeouts)\tfinished in: %f" % (timeout, time() - t))
         return work_done
 
     def kill(self, force=False):
