@@ -49,7 +49,7 @@ class SimulationSet:
         try:
             return np.mean(self.metrics)
         except ValueError:
-            return -1
+            return float("Inf")
 
     def best(self):
         try:
