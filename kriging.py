@@ -46,6 +46,7 @@ class Kriging:
         overview = self._db['overview']
         overview.insert({'hash': hash, 'json_string': parameters})
         self.db = self._db[hash]
+        self.db_name = db_name
 
     def initialize(self, initial_runs):
         self.simulations = SimulationSet()
@@ -127,6 +128,7 @@ class Kriging:
             #TODO pred = np.array([gp.predict(candidate[0]) for candidate in simulation_candidates], dtype=np.float64)
             #TODO logger.info("    mean prediction accuracy %f" % np.mean(np.absolute((simulation_candidates[0] - pred) / simulation_candidates[1])))
             if self.simulations.best()[RESULT] < success:
+                self.save_result()
                 return self.simulations.best_dict(), self.test(self.simulations.best_dict(), 20)
             if (schlinge <= 0.001).all():
                 logger.info("\n\n\ni  ----------- SCHLINGE RELEASED = 2 ---------------\n\n\n")
@@ -140,17 +142,18 @@ class Kriging:
                 logger.info("unique simulations     %i" % len(self.simulations))
                 logger.info(self.simulations.best_dict())
                 if key_pressed == 'c':
+                    self.save_result()
                     return self.simulations.best_dict(), self.test(self.simulations.best_dict(), 20)
             if key_pressed == 't':
                 logger.info(json.dumps(self.test(self.simulations.best_dict(), 20), indent=20))
             log_data = {
                 'iteration': stats_iterations,
-                'average_kriging': kriging_candidates.average(),
-                'best_kriging':  kriging_candidates.best()[RESULT],
-                'average_current_simulation': simulation_candidates.average(),
-                'best_simulation_candidate': simulation_candidates.best()[RESULT],
-                'total_average': self.simulations.average(),
-                'best': self.simulations.best()[RESULT]
+                'average_kriging': float(kriging_candidates.average()),
+                'best_kriging':  float(kriging_candidates.best()[RESULT]),
+                'average_current_simulation': float(simulation_candidates.average()),
+                'best_simulation_candidate': float(simulation_candidates.best()[RESULT]),
+                'total_average': float(self.simulations.average()),
+                'best': float(self.simulations.best()[RESULT])
             }
             log_data.update(self.test(self.simulations.best_dict(), 20))
             logger.info(self.test(self.simulations.best_dict(), 20))
@@ -158,7 +161,9 @@ class Kriging:
             self.run_local(self.simulations.best_dict(), 1)
             stats_iterations += 1
 
-
+    def save_result(self):
+        with open('%s.json' % self.db_name, 'wb') as fp:
+            json.dump(self.simulations.best_dict(), fp)
 
     def candidates_better(self, old_best, candidates):
         best = deepcopy(old_best)
