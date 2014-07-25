@@ -215,19 +215,30 @@ class Kriging:
         self.run_local(InputSet.weight_point(weight))
 
 
-    def test(self, input, repetitions):
+    def test(self, input, repetitions, all=False):
         """ runs one input; returns simulation """
         raw_output = self.remote_saudifirms.run_D2D([input], repetitions)
         for row in raw_output:
             input = row['parameters']
             output = row['result']
             self.simulations.insert(input, output)
-        output = defaultdict(lambda: defaultdict(int))
 
+        output_complete = defaultdict(lambda: defaultdict(int))
         for row in raw_output:
+            output = row['result']
+            for category in output:
+                try:
+                    for key in output[category]:
+                        output_complete[category][key] += (1 / repetitions) * output[category][key]
+                except TypeError:
+                    continue
+
+        output_target_only = defaultdict(lambda: defaultdict(int))
+        for row in raw_output:
+            output = row['result']
             for category, key in SimulationSet.output_keys:
-                output[category][key] += (1 / repetitions) * row['result'][category][key]
-        return flatten(output, '')
+                output_target_only[category][key] += (1 / repetitions) * output[category][key]
+        return flatten(output_target_only, ''), flatten(output_complete, 'output')
 
 
 def flatten(d, parent_key=''):
