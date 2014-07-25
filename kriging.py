@@ -88,37 +88,41 @@ class Kriging:
         while True:
             logger.info("")
             logger.info("iteration: %i total simulations: %i" % (stats_iterations, len(self.simulations)))
-            old_best = self.simulations.best()
-            kriging_candidates = kriger(self.simulations, InputSet, schlinge, batch_size, gp)
+            best_old = self.simulations.best()
+            kriging_candidates = kriger(self.simulations, InputSet, schlinge, batch_size, best_old[RESULT], gp)
             kriging_candidates = self.run_add(kriging_candidates)
-            kriging_candidate_is_better, kriging_candidate, num_better = self.candidates_better(old_best, kriging_candidates)
-            if kriging_candidate_is_better:
-                logger.info("+k+ %s (%s) better: %i" % (kriging_candidate[1], old_best[1], num_better))
+            best_kriging_candidate = kriging_candidates.best()
+            if best_kriging_candidate[RESULT] < best_old[RESULT]:
+                logger.info("+k+ %s (%s) better: %i" % (best_kriging_candidate[RESULT], best_old[RESULT], kriging_candidates.candidaties_better(best_old)))
                 stats_innovation_kriging += 1
-                candidate = kriging_candidate
+                candidate = best_kriging_candidate
+                kriging_candidate_is_better = True
             else:
-                logger.info("-k- %s" % kriging_candidate[1])
-                candidate = old_best
+                logger.info("-k- (%s) %s" % (best_kriging_candidate[RESULT], best_old[RESULT]))
+                candidate = best_old
+                kriging_candidate_is_better = False
 
             logger.info("***    hypercube:")
             simulation_candidates = centered_latin_hypercube_I(candidate[0], schlinge, InputSet.lb, InputSet.ub, batch_size)
             simulation_candidates = self.run_add(simulation_candidates)
-            simulation_candidate_is_better, simulation_candidate, num_better = self.candidates_better(candidate, simulation_candidates)
-            if simulation_candidate_is_better:
-                logger.info("+s+ %s (%s) better: %i" % (simulation_candidate[1], candidate[1], num_better))
+            best_simulation_candidate = simulation_candidates.best()
+            if best_simulation_candidate[RESULT] < candidate[RESULT]:
+                logger.info("+s+ %s (%s) better: %i" % (
+                    best_simulation_candidate[1], candidate[1], simulation_candidates.candidaties_better(candidate)))
                 stats_innovation_simulation += 1
-                candidate = simulation_candidate
+                simulation_candidate_is_better = True
             else:
-                logger.info("-s- %s" % simulation_candidate[1])
+                logger.info("-s- (%s) %s" % (best_simulation_candidate[RESULT], candidate[RESULT]))
+                simulation_candidate_is_better = False
 
             if not kriging_candidate_is_better and not simulation_candidate_is_better:
                 schlinge -= schlinge_change
-                schlinge = np.maximum(schlinge, np.absolute(candidate[0] - old_best[0]) / diameter)
+                schlinge = np.maximum(schlinge, np.absolute(candidate[0] - best_old[0]) / diameter)
                 #schlinge = np.minimum(schlinge, [2] * len(schlinge))
                 schlinge[schlinge < 0] = 0
-                schlinge = np.maximum(np.absolute(self.simulations.best()[0] - old_best[0]) / initial_distance, schlinge)
+                schlinge = np.maximum(np.absolute(self.simulations.best()[0] - best_old[0]) / initial_distance, schlinge)
 
-            logger.info("    simul:    %10.8f (%10.8f)" % (candidate[1], (old_best[1] - candidate[1])))
+            logger.info("    simul:    %10.8f (%10.8f)" % (candidate[1], (best_old[1] - candidate[1])))
             try:
                 score = gp.score(simulation_candidates.inputs, simulation_candidates.metrics)
                 logger.info("    score: %4.2g" % score)
@@ -146,8 +150,6 @@ class Kriging:
                 if key_pressed == 'c':
                     self.save_result()
                     return self.simulations.best_dict(), self.test(self.simulations.best_dict(), 20)
-            if key_pressed == 't':
-                logger.info(json.dumps(self.test(self.simulations.best_dict(), 20), indent=20))
             log_data = {
                 'iteration': stats_iterations,
                 'average_kriging': float(kriging_candidates.average()),
@@ -157,8 +159,13 @@ class Kriging:
                 'total_average': float(self.simulations.average()),
                 'best': float(self.simulations.best()[RESULT])
             }
-            log_data.update(self.test(self.simulations.best_dict(), 20))
-            logger.info(self.test(self.simulations.best_dict(), 20))
+            best_output, best_complete = self.test(self.simulations.best_dict(), 20)
+            log_data.update(best_complete)
+            log_data.update(flatten(self.simulations.best_var_dict(), 'input'))
+            logger.info("input:")
+            logger.info(self.simulations.best_var_dict())
+            logger.info("output:")
+            logger.info(best_output)
             log_values.upsert(log_data, ['iteration'])
             self.run_local(self.simulations.best_dict(), 1)
             stats_iterations += 1
