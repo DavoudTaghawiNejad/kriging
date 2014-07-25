@@ -15,13 +15,25 @@ class RemoteSaudiFirms:
         self.sender.bind(address_prefix + str(task))
         self.receiver = self.context.socket(zmq.PULL)
         self.receiver.bind(address_prefix + str(result))
+        self.poller = zmq.Poller()
+        self.poller.register(self.receiver, zmq.POLLIN)
         self.controller = self.context.socket(zmq.PUB)
         self.controller.bind(address_prefix + str(kill))
         #logger.info("start up Simulations and hit ENTER")
         #raw_input()
         self.total_tasks = 0
+        self.out_standing = 0
 
     def vent(self, jobs):
+        for i in range(self.out_standing):
+            try:
+                self.receiver.recv(zmq.NOBLOCK)
+            except:
+                pass
+            else:
+                print("outstanding %i" % self.out_standing)
+                self.out_standing -= 1
+
         self.total_tasks += len(jobs)
         for job in jobs:
             self.sender.send_string(json.dumps(job))
@@ -31,7 +43,12 @@ class RemoteSaudiFirms:
         results = []
         t = time()
         while done_tasks < self.total_tasks:
-            results.append(self.receiver.recv())
+            socks = dict(self.poller.poll(4 * 60000 + 10000))  # in minutes 60000
+            if socks:
+                results.append(self.receiver.recv())
+            else:
+                print "error: message timeout"
+                self.out_standing += 1
             done_tasks += 1
             print('\rdone: %i/%i time per task: %6.2f' % (done_tasks, self.total_tasks, done_tasks / (time() - t))),
         self.total_tasks = 0
@@ -49,16 +66,12 @@ class RemoteSaudiFirms:
             try:
                 return_json = json.loads(element)
             except ValueError:
-                raise ValueError(element)
+                logger.error(element)
+                continue
             if return_json['result'] == "timeout":
                 timeout += 1
-                continue
-            try:
+            else:
                 work_done.append(return_json)
-            except ValueError:
-                logger.info("++++++++++")
-                logger.info(element)
-                raise
         print("(%i timeouts)\tfinished in: %f" % (timeout, time() - t))
         return work_done
 
