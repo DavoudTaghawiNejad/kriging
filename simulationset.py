@@ -4,25 +4,29 @@ import numpy as np
 from collections import  defaultdict
 from inputset import InputSet
 
+RESULT = 1
+
 class SimulationSet:
     @staticmethod
-    def setup(dtypes, target):
+    def setup(dtypes, target, transform):
         SimulationSet.input_keys = get_two_hierarchies_of_keys(dtypes)
         SimulationSet.output_keys = get_two_hierarchies_of_keys(target)
         SimulationSet.target = encode(target, SimulationSet.output_keys)
+        SimulationSet.transform = transform
 
     def __init__(self):
         self.inputs = []
         self.metrics = []
 
     def insert(self, input, output):
+        metric = self.metric(self.transform(output))
         input = encode(input, SimulationSet.input_keys)
         for i in range(len(self.inputs)):
             if (self.inputs[i] == input).all():
-                self.metrics[i] = (self.metrics[i] + self.metric(output)) / 2
+                self.metrics[i] = (self.metrics[i] + metric) / 2
                 return False
         self.inputs.append(input)
-        self.metrics.append(self.metric(output))
+        self.metrics.append(metric)
         return True
 
     def __getitem__(self, item):
