@@ -65,14 +65,20 @@ class SimulationSet:
         assert not(np.isnan(input).any())
         return input, result
 
-    def best_dict(self):
+    def candidaties_better(self, old):
+        return sum(np.array(self.metrics) > old[RESULT])
+
+    def best_var_dict(self):
         input, result = self.best()
         d = defaultdict(dict)
         i = 0
         for category, key in SimulationSet.input_keys:
             d[category][key] = input[i]
             i += 1
-        return combine(InputSet.fixed_input, d, SimulationSet.input_keys)
+        return d
+
+    def best_dict(self):
+        return combine(InputSet.fixed_input, self.best_var_dict(), SimulationSet.input_keys)
 
     def __len__(self):
         return len(self.inputs)
