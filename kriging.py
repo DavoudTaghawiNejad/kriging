@@ -22,19 +22,20 @@ fh = logging.FileHandler('kriging.log')
 fh.setLevel(logging.INFO)
 ch = logging.StreamHandler()
 ch.setLevel(logging.DEBUG)
-formatter_stream = logging.Formatter('%(asctime)s\t%(message)s', datefmt='%H:%M:%S')
+formatter_stream = logging.Formatter('%(asctime)s %(lineno)03d\t%(message)s', datefmt='%H:%M:%S')
 formatter_file = logging.Formatter('%(asctime)s\t%(message)s', datefmt='%m-%d %H:%M:%S')
 fh.setFormatter(formatter_file)
 ch.setFormatter(formatter_stream)
 logger.addHandler(fh)
 logger.addHandler(ch)
 
+dont_transform = lambda self, x: x
 
 class Kriging:
-    def __init__(self, parameters, target, repetitions, db_name):
-        print("v. 0.1")
+    def __init__(self, parameters, target, repetitions, db_name, transform=dont_transform):
+        print("v. 0.2")
         fixed_parameters, lower_limits, upper_limits, dtypes = split(parameters)
-        SimulationSet.setup(dtypes, target)
+        SimulationSet.setup(dtypes, target, transform)
         InputSet.setup(lower_limits, upper_limits, dtypes, fixed_parameters)
         self.repetitions = repetitions
         self.remote_saudifirms = RemoteSaudiFirms(task=5007, result=5008, kill=5009)
@@ -63,6 +64,7 @@ class Kriging:
             middle_point = InputSet.middle_point()
             simulation_candidates = centered_latin_hypercube_I(middle_point, np.ones_like(middle_point), InputSet.lb, InputSet.ub, initial_runs)
             self.run_add(simulation_candidates)
+        print("done loading/initializing")
 
     def print_dict(self):
         inputset = InputSet()
