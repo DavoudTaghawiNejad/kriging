@@ -12,7 +12,7 @@ from sklearn import gaussian_process
 import json
 import dataset
 from hashlib import sha224
-from collections import defaultdict, MutableMapping
+from collections import defaultdict, MutableMapping, OrderedDict
 import logging
 
 
@@ -121,8 +121,6 @@ class Kriging:
                 #schlinge = np.minimum(schlinge, [2] * len(schlinge))
                 schlinge[schlinge < 0] = 0
                 schlinge = np.maximum(np.absolute(self.simulations.best()[0] - best_old[0]) / initial_distance, schlinge)
-
-            logger.info("    simul:    %10.8f (%10.8f)" % (candidate[1], (best_old[1] - candidate[1])))
             try:
                 score = gp.score(simulation_candidates.inputs, simulation_candidates.metrics)
                 logger.info("    score: %4.2g" % score)
@@ -162,10 +160,11 @@ class Kriging:
             best_output, best_complete = self.test(self.simulations.best_dict(), 20)
             log_data.update(best_complete)
             log_data.update(flatten(self.simulations.best_var_dict(), 'input'))
+            log_data = OrderedDict(sorted(log_data.items()))
             logger.info("input:")
-            logger.info(self.simulations.best_var_dict())
+            logger.info(sorted(self.simulations.best_var_dict().items()))
             logger.info("output:")
-            logger.info(best_output)
+            logger.info(sorted(best_output.items()))
             log_values.upsert(log_data, ['iteration'])
             self.run_local(self.simulations.best_dict(), 1)
             stats_iterations += 1
