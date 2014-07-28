@@ -83,6 +83,11 @@ class SimulationSet:
     def __len__(self):
         return len(self.inputs)
 
+    def half(self):
+        middle = int(len(self.inputs) / 2)
+        self.inputs = self.inputs[middle:]
+        self.metrics = self.metrics[middle:]
+
 
 def encode(what, keys):
     return np.array([what[category][key] for category, key in keys])
