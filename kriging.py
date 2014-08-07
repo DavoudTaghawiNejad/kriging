@@ -33,7 +33,7 @@ dont_transform = lambda self, x: x
 
 class Kriging:
     def __init__(self, parameters, target, repetitions, db_name, transform=dont_transform):
-        print("v. 0.2")
+        print("v. 0.3")
         fixed_parameters, lower_limits, upper_limits, dtypes = split(parameters)
         SimulationSet.setup(dtypes, target, transform)
         InputSet.setup(lower_limits, upper_limits, dtypes, fixed_parameters)
@@ -221,22 +221,20 @@ class Kriging:
             input = row['parameters']
             output = row['result']
             self.simulations.insert(input, output)
-
+        actual_repetitions = len(raw_output)
         output_complete = defaultdict(lambda: defaultdict(int))
         for row in raw_output:
             output = row['result']
             for category in output:
-                try:
+                if isinstance(output[category], dict):
                     for key in output[category]:
-                        output_complete[category][key] += (1 / repetitions) * output[category][key]
-                except TypeError:
-                    continue
+                        output_complete[category][key] += (1 / actual_repetitions) * output[category][key]
 
         output_target_only = defaultdict(lambda: defaultdict(int))
         for row in raw_output:
             output = row['result']
             for category, key in SimulationSet.output_keys:
-                output_target_only[category][key] += (1 / repetitions) * output[category][key]
+                output_target_only[category][key] += (1 / actual_repetitions) * output[category][key]
         return flatten(output_target_only, ''), flatten(output_complete, 'output')
 
 
