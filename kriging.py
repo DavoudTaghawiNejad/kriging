@@ -135,8 +135,9 @@ class Kriging:
                 self.save_result()
                 return self.simulations.best_dict(), self.test(self.simulations.best_dict(), 20)
             if (schlinge <= 0.001).all():
-                logger.info("\n\n\ni  ----------- SCHLINGE RELEASED = 2 ---------------\n\n\n")
-                schlinge.fill(2)
+                logger.info("\n\n\ni  ----------- SCHLINGE RELEASED ---------------\n\n\n")
+                schlinge.fill(schlinge_change * 5)
+                schlinge_change = schlinge_change / 2
             key_pressed = get_key()
             if key_pressed == 'c' or key_pressed == 'i':
                 logger.info("Schlinge %s" % str(schlinge))
