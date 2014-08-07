@@ -42,7 +42,7 @@ class Kriging:
         self.local_saudifirms = RemoteSaudiFirms(task=5567, result=5568, kill=5569)
 
         self._db = dataset.connect("sqlite:///%s.sqlite3" % db_name)
-        parameters = json.dumps(fixed_parameters)
+        parameters = json.dumps(sorted(fixed_parameters.items()))
         hash = sha224(parameters).hexdigest()[:7]
         overview = self._db['overview']
         overview.insert({'hash': hash, 'json_string': parameters})
@@ -162,7 +162,7 @@ class Kriging:
             log_data.update(flatten(self.simulations.best_var_dict(), 'input'))
             log_data = OrderedDict(sorted(log_data.items()))
             logger.info("input:")
-            logger.info(sorted(self.simulations.best_var_dict().items()))
+            logger.info(sorted(flatten(self.simulations.best_var_dict()).items()))
             logger.info("output:")
             logger.info(sorted(best_output.items()))
             log_values.upsert(log_data, ['iteration'])
