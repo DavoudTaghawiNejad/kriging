@@ -4,7 +4,7 @@ import zmq
 import json
 from time import time
 import logging
-
+import sys
 logger = logging.getLogger('kriging.kriger')
 
 class RemoteSaudiFirms:
@@ -25,14 +25,23 @@ class RemoteSaudiFirms:
         self.out_standing = 0
 
     def vent(self, jobs):
+        self.old_results = []
         for i in range(self.out_standing):
             try:
-                self.receiver.recv(zmq.NOBLOCK)
+                msg = self.receiver.recv(zmq.NOBLOCK)
             except:
                 pass
             else:
-                print("outstanding %i" % self.out_standing)
                 self.out_standing -= 1
+                print("outstanding %i" % self.out_standing)
+                try:
+                    element = json.loads(msg)
+                except ValueError:
+                    logger.error(element)
+                    continue
+                self.old_results.append(element)
+                if "timeout" in element['result']:
+                    print("outstanding timeout"),
 
         self.total_tasks += len(jobs)
         for job in jobs:
@@ -43,14 +52,23 @@ class RemoteSaudiFirms:
         results = []
         t = time()
         while done_tasks < self.total_tasks:
-            socks = dict(self.poller.poll(4 * 60000 + 10000))  # in minutes 60000
+            socks = dict(self.poller.poll(30 * 60000))  # in minutes 60000
             if socks:
-                results.append(self.receiver.recv())
+                msg = self.receiver.recv()
+                try:
+                    element = json.loads(msg)
+                except ValueError:
+                    logger.error(element)
+                    continue    
+                results.append(element)
+                if "timeout" in element['result']:
+                    print('timeout'),
+                print("%i," % len(results)),
             else:
-                print "error: message timeout"
-                self.out_standing += 1
+                print "error: message timeout",
+                break
             done_tasks += 1
-            print('\rdone: %i/%i time per task: %6.2f' % (done_tasks, self.total_tasks, done_tasks / (time() - t))),
+            sys.stdout.flush()
         self.total_tasks = 0
         return results
 
@@ -62,16 +80,11 @@ class RemoteSaudiFirms:
         print("\r%i tasks given 0 done" % self.total_tasks),
         work_done = []
         timeout = 0
-        for element in self.sink():
-            try:
-                return_json = json.loads(element)
-            except ValueError:
-                logger.error(element)
-                continue
-            if return_json['result'] == "timeout":
+        for element in self.sink() + self.old_results:
+            if "timeout" in element['result']:
                 timeout += 1
             else:
-                work_done.append(return_json)
+                work_done.append(element)
         print("(%i timeouts)\tfinished in: %f" % (timeout, time() - t))
         return work_done
 
