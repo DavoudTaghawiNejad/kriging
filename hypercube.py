@@ -17,7 +17,8 @@ def _centered_latin_hypercube(center, schlinge, lb, ub, samples):
 
 
 def centered_latin_hypercube_A(center, schlinge, lb, ub, samples):
-    samples = max(samples, len(center))
+    while len(center) > samples:
+        samples *= 2
     fields = np.logical_and(schlinge > .1, ub > lb)
     t_center = center[fields]
     t_schlinge = schlinge[fields]
