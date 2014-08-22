@@ -58,11 +58,14 @@ class RemoteSaudiFirms:
                 try:
                     element = json.loads(msg)
                 except ValueError:
-                    logger.error(element)
+                    logger.error(msg)
                     continue    
                 results.append(element)
-                if "timeout" in element['result']:
-                    print('timeout'),
+                if "timeout" in element:
+                    print('timeout - parameters:'),
+                    print(element['parameters'])
+                    print('timeout - result:'),
+                    print(element['result'])
                 print("%i," % len(results)),
             else:
                 print "error: message timeout",
