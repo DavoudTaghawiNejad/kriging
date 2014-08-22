@@ -116,7 +116,7 @@ class Kriging:
                 simulation_candidate_is_better = False
 
             if not kriging_candidate_is_better and not simulation_candidate_is_better:
-                schlinge -= schlinge_change
+                schlinge = schlinge * (1 - schlinge_change)
                 schlinge = np.maximum(schlinge, np.absolute(candidate[0] - best_old[0]) / diameter)
                 #schlinge = np.minimum(schlinge, [2] * len(schlinge))
                 schlinge[schlinge < 0] = 0
@@ -199,7 +199,7 @@ class Kriging:
             new = self.simulations.insert(input, output)
             new_simulations.insert(input, output)
             if new:
-                self.db.insert({'input': json.dumps(input), 'output': json.dumps(output)})
+                self.db.insert({u'input': json.dumps(input), u'output': json.dumps(output)})
         return new_simulations
 
     def run_local(self, input, repetitions=1):
