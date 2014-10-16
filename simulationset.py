@@ -3,6 +3,10 @@ from commonset import get_two_hierarchies_of_keys
 import numpy as np
 from collections import  defaultdict
 from inputset import InputSet
+import logging
+
+
+logger = logging.getLogger('kriging.simulationset')
 
 RESULT = 1
 
@@ -87,6 +91,22 @@ class SimulationSet:
         middle = int(len(self.inputs) / 2)
         self.inputs = self.inputs[middle:]
         self.metrics = self.metrics[middle:]
+
+    def filter(self, schlinge):
+
+        best, _ = self.best()
+        new_inputs = []
+        new_metrics = []
+        for input, metric in zip(self.inputs, self.metrics):
+            if (best - schlinge < input).all() and (input < best + schlinge).all():
+                new_inputs.append(input)
+                new_metrics.append(metric)
+        if len(new_metrics) > 1:
+            logger.info("SimulationSet.filter for %i to %i:" % len(self.metrics), len(new_metrics))
+            self.inputs = new_inputs
+            self.metrics = new_metrics
+        else:
+            print("simulationset.filter XXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
 
 def encode(what, keys):

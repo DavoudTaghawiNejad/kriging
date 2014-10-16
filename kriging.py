@@ -119,6 +119,7 @@ class Kriging:
                 simulation_candidate_is_better = False
 
             if not kriging_candidate_is_better and not simulation_candidate_is_better:
+                self.simulations.filter(schlinge)
                 schlinge = schlinge * (1 - schlinge_change)
                 schlinge = np.maximum(schlinge, np.absolute(candidate[0] - best_old[0]) / diameter)
                 #schlinge = np.minimum(schlinge, [2] * len(schlinge))
