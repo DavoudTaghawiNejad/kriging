@@ -32,7 +32,7 @@ logger.addHandler(ch)
 dont_transform = lambda self, x: x
 
 class Kriging:
-    def __init__(self, parameters, target, repetitions, db_name, transform=dont_transform):
+    def __init__(self, parameters, target, repetitions, db_name, transform=dont_transform, local_simulations=False):
         print("v. 0.3")
         fixed_parameters, lower_limits, upper_limits, dtypes = split(parameters)
         SimulationSet.setup(dtypes, target, transform)
@@ -48,6 +48,7 @@ class Kriging:
         overview.insert({'hash': hash, 'json_string': parameters})
         self.db = self._db[hash]
         self.db_name = db_name
+        self.local_simulations = local_simulations
 
     def initialize(self, initial_runs):
         self.simulations = SimulationSet()
@@ -62,7 +63,9 @@ class Kriging:
 
         if len(self.simulations) < initial_runs:
             middle_point = InputSet.middle_point()
+            print("create simulation candidates")
             simulation_candidates = centered_latin_hypercube_I(middle_point, np.ones_like(middle_point), InputSet.lb, InputSet.ub, initial_runs)
+            print("run simulations")
             self.run_add(simulation_candidates)
         print("done loading/initializing")
 
@@ -167,7 +170,8 @@ class Kriging:
             logger.info("output:")
             logger.info(sorted(best_output.items()))
             log_values.upsert(log_data, ['iteration'])
-            self.run_local(self.simulations.best_dict(), 1)
+            if self.local_simulations:
+                self.run_local(self.simulations.best_dict(), 1)
             stats_iterations += 1
 
     def save_result(self):
