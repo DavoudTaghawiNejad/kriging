@@ -74,7 +74,7 @@ class Kriging:
         inputset.insert(InputSet.middle_point())
         logger.info(dict(inputset[0]))
 
-    def kriging(self, batch_size=28, success=0.01, schlinge_start=2.0, schlinge_change=0.05):
+    def kriging(self, batch_size=28, kriging_batch_size=100, success=0.01, schlinge_start=2.0, schlinge_change=0.05):
         INPUT, RESULT = 0, 1
         log_values = self._db['log_values']
         gp = gaussian_process.GaussianProcess(
@@ -92,7 +92,7 @@ class Kriging:
             logger.info("")
             logger.info("iteration: %i total simulations: %i" % (stats_iterations, len(self.simulations)))
             best_old = self.simulations.best()
-            kriging_candidates = kriger(self.simulations, InputSet, schlinge, batch_size, best_old[RESULT], gp)
+            kriging_candidates = kriger(self.simulations, InputSet, schlinge, kriging_batch_size, best_old[RESULT], gp)
             kriging_candidates = self.run_add(kriging_candidates)
             best_kriging_candidate = kriging_candidates.best()
             if best_kriging_candidate[RESULT] < best_old[RESULT]:
