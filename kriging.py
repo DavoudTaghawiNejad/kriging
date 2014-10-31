@@ -38,8 +38,8 @@ class Kriging:
         SimulationSet.setup(dtypes, target, transform)
         InputSet.setup(lower_limits, upper_limits, dtypes, fixed_parameters)
         self.repetitions = repetitions
-        self.remote_saudifirms = RemoteSaudiFirms(task=5007, result=5008, kill=5009)
-        self.local_saudifirms = RemoteSaudiFirms(task=5567, result=5568, kill=5569)
+        self.remote_saudifirms = RemoteSaudiFirms(task=5007, result=5008)
+        self.local_saudifirms = RemoteSaudiFirms(task=5567, result=5568)
 
         self._db = dataset.connect("sqlite:///%s.sqlite3" % db_name)
         parameters = json.dumps(sorted(fixed_parameters.items()))
@@ -65,7 +65,7 @@ class Kriging:
             middle_point = InputSet.middle_point()
             print("create simulation candidates")
             simulation_candidates = centered_latin_hypercube_I(middle_point, np.ones_like(middle_point), InputSet.lb, InputSet.ub, initial_runs)
-            print("run simulations")
+            print("run %i simulations" % len(simulation_candidates))
             self.run_add(simulation_candidates)
         print("done loading/initializing")
 
