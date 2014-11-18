@@ -26,7 +26,7 @@ class RemoteSaudiFirms(object):
                 i += 1
                 self.sender.recv()
                 self.sender.send_string(json.dumps(job))
-                print('\rout/done: %i/%i   ' % (i, len(jobs))),
+                print('\rout/done: %i/%i   ' % (i, len(jobs) * repetitions)),
                 sys.stdout.flush()
 
     def sink(self, total_tasks):
