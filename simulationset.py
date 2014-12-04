@@ -1,3 +1,4 @@
+
 from __future__ import division
 from commonset import get_two_hierarchies_of_keys
 import numpy as np
@@ -102,7 +103,7 @@ class SimulationSet:
                 new_inputs.append(input)
                 new_metrics.append(metric)
         if len(new_metrics) > 1:
-            logger.info("SimulationSet.filter for %i to %i:" % len(self.metrics), len(new_metrics))
+            logger.info("SimulationSet.filter for %i to %i:" % (len(self.metrics), len(new_metrics)))
             self.inputs = new_inputs
             self.metrics = new_metrics
         else:
