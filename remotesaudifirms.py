@@ -1,3 +1,6 @@
+
+
+
 #pylint: disable=C0103, C0111, C0301, C0325, E1101
 from __future__ import division
 import zmq
@@ -9,24 +12,28 @@ import sys
 
 logger = logging.getLogger('kriging.kriger')
 
+dont_transform = lambda self, x: x
+
 class RemoteSaudiFirms(object):
-    def __init__(self, task=5557, result=5558, address_prefix="tcp://*:"):
+    def __init__(self, task=5557, result=5558, address_prefix="tcp://*:", input_transfromation=dont_transform):
         print(address_prefix + str(result))
         self.context = zmq.Context()
         self.sender = self.context.socket(zmq.REP)
         self.sender.bind(address_prefix + str(task))
         self.receiver = self.context.socket(zmq.PULL)
         self.receiver.bind(address_prefix + str(result))
+        self.input_transfromation = input_transfromation
 
 
     def vent(self, jobs, repetitions):
         i = 0
         for _ in range(repetitions):
             for job in jobs:
-                i += 1
                 self.sender.recv()
+                job = self.input_transfromation(job)
                 self.sender.send_string(json.dumps(job))
-                print('\rout/done: %i/%i   ' % (i, len(jobs) * repetitions)),
+                i += 1
+                print('\rout: %i/%i  ' % (i, len(jobs) * repetitions)),
                 sys.stdout.flush()
 
     def sink(self, total_tasks):
@@ -35,20 +42,19 @@ class RemoteSaudiFirms(object):
         results = []
         while done_tasks < total_tasks:
             msg = self.receiver.recv()
+            done_tasks += 1
             try:
                 element = json.loads(msg)
             except ValueError:
-                logger.error(msg)
+                print("\r\t\t\t\t\t\t'%s'" % msg),
+                if msg != 'java.lang.Exception: zero samples, timeout?':
+                    print('')
+                timeout += 1
                 continue
             results.append(element)
-            if "timeout" in element:
-                print('timeout - parameters:'),
-                print(element['parameters'])
-                print('timeout - result:'),
-                print(element['result'])
-                timeout += 1
-            done_tasks += 1
-        print("timeouts: %i/%i" % (timeout, total_tasks))
+            print('\rdone: %i/%i timeout: %i  ' % (done_tasks, total_tasks, timeout)),
+            sys.stdout.flush()
+        logger.error("timeouts: %i/%i" % (timeout, total_tasks))
         return results
 
     def run_D2D(self, jobs, repetitions):
