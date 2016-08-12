@@ -22,16 +22,26 @@ class SimulationSet:
     def __init__(self):
         self.inputs = []
         self.metrics = []
+        self.count = []
+
+    def trf(self, output):
+        self.transform(output)
 
     def insert(self, input, output):
         metric = self.metric(self.transform(output))
         input = encode(input, SimulationSet.input_keys)
         for i in range(len(self.inputs)):
-            if (self.inputs[i] == input).all():
-                self.metrics[i] = (self.metrics[i] + metric) / 2
+            assert isinstance(input, np.ndarray), type(input)
+            assert isinstance(self.inputs[i], np.ndarray), type(input)
+            if np.array_equal(self.inputs[i], input):
+                count = self.count[i]
+                self.metrics[i] = (self.metrics[i] * count + metric) / (count + 1)
+                self.count[i] += 1
                 return False
         self.inputs.append(input)
         self.metrics.append(metric)
+        self.count.append(1)
+        assert len(self.inputs) == len(self.metrics) == len(self.count)
         return True
 
     def __getitem__(self, item):
@@ -67,20 +77,22 @@ class SimulationSet:
             return (np.zeros(len(SimulationSet.input_keys)), float("Inf"))
         input = self.inputs[index]
         result = self.metrics[index]
-        assert not(np.isnan(input).any())
         return input, result
 
     def candidaties_better(self, old):
         return sum(np.array(self.metrics) > old[RESULT])
 
-    def best_var_dict(self):
+    def best_var_dict_result(self):
         input, result = self.best()
         d = defaultdict(dict)
         i = 0
         for category, key in SimulationSet.input_keys:
             d[category][key] = input[i]
             i += 1
-        return d
+        return d, result
+
+    def best_var_dict(self):
+        return self.best_var_dict_result()[0]
 
     def best_dict(self):
         return combine(InputSet.fixed_input, self.best_var_dict(), SimulationSet.input_keys)
