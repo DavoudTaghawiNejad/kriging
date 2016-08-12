@@ -1,6 +1,3 @@
-
-
-
 #pylint: disable=C0103, C0111, C0301, C0325, E1101
 from __future__ import division
 import zmq
@@ -12,25 +9,20 @@ import sys
 
 logger = logging.getLogger('kriging.kriger')
 
-dont_transform = lambda self, x: x
 
 class RemoteSaudiFirms(object):
-    def __init__(self, task=5557, result=5558, address_prefix="tcp://*:", input_transfromation=dont_transform):
-        print(address_prefix + str(result))
+    def __init__(self, task=5557, result=5558, address_prefix="tcp://*:"):
         self.context = zmq.Context()
         self.sender = self.context.socket(zmq.REP)
         self.sender.bind(address_prefix + str(task))
         self.receiver = self.context.socket(zmq.PULL)
         self.receiver.bind(address_prefix + str(result))
-        self.input_transfromation = input_transfromation
-
 
     def vent(self, jobs, repetitions):
         i = 0
         for _ in range(repetitions):
             for job in jobs:
                 self.sender.recv()
-                job = self.input_transfromation(job)
                 self.sender.send_string(json.dumps(job))
                 i += 1
                 print('\rout: %i/%i  ' % (i, len(jobs) * repetitions)),
