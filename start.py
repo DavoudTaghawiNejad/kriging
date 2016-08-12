@@ -1,3 +1,6 @@
+""" This is an example start.py file that starts the kriging mechanism
+
+"""
 from __future__ import division
 from kriging import Kriging
 from pprint import pprint
@@ -135,6 +138,8 @@ def transform(self, x):
     return x
 
 def calibration():
+    # the kriging algorithem gets a targets, to which the sum of squares should be
+    # minimized
     calibration = Kriging(
         target=target,
         parameters=parameters,
