@@ -1,5 +1,3 @@
-
-
 from __future__ import division
 from lowest_values import lowest_values
 from predictedset import PredictedSet
@@ -11,6 +9,9 @@ logger = logging.getLogger('kriging.kriger')
 
 
 def kriger(simulations, InputSet, schlinge, num_return_best, old_best_metric, gp):
+    """ fits a gaussian model, returns the most promising values, which includes
+    candidates choosen by a latin hypercube as will as the minimum of the gaussian
+    model choosen by basinhopping """
     print('kriger fit'),
     try:
         gp.fit(simulations.inputs, simulations.metrics)
